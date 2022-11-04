@@ -30,8 +30,6 @@
             display: none;
         }
 
-
-        #map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div
     </style>
 </head>
 <body>
@@ -73,6 +71,7 @@
             d3.csv(coords)
         ]).then(data => {
             const shit = data[0]
+
             shit.forEach((x, i) =>
                 L.marker([x.Latitude, x.Longitude], {icon: female}).addTo(map).bindPopup(x.Country)
             )
