@@ -22,7 +22,7 @@
         const coords = "./Data/average-latitude-longitude-countries.csv";
 
 
-        bounds = new L.LatLngBounds(new L.LatLng(49.5, -11.3), new L.LatLng(61.2, 2.5));
+        bounds = new L.LatLngBounds(new L.LatLng(-89.93411921886802, -1326.0937500000002), new L.LatLng(89.93411921886802, 1326.0937500000002));
         var map = new L.map('map').setView([0, 0], 0);
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
@@ -31,8 +31,9 @@
             attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
         }).addTo(map);
         // https://gis.stackexchange.com/questions/179630/setting-bounds-and-making-map-bounce-back-if-moved-away
-        map.setMaxBounds(map.getBounds());
-
+        map.setMaxBounds(bounds);
+        console.log(map.getSouthEast())
+        console.log(map.getBounds());
         //icons
         var female = L.icon({
             iconUrl: './Assets/female-icon.png',
