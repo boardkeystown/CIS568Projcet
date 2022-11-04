@@ -8,8 +8,19 @@
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
             integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
             crossorigin=""></script>
+
     <script src="./lib/d3.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
+
+
+    <!-- Esri Leaflet Geocoder -->
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"
+    />
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet"></script>
+    <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
     <meta charset="UTF-8">
     <title>CIS Project</title>
     <style>
@@ -37,9 +48,10 @@
             minZoom: 3,
             attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
         }).addTo(map);
+        //L.Control.geocoder().addTo(map);
         // https://gis.stackexchange.com/questions/179630/setting-bounds-and-making-map-bounce-back-if-moved-away
         map.setMaxBounds(bounds);
-        console.log(map.getSouthEast())
+
         console.log(map.getBounds());
         //icons
         var female = L.icon({
@@ -69,11 +81,43 @@
             )
         })
 
+        /*map.on('click', function(e) {
+            var temp = e.latlng
+
+            //var popup = L.popup(e.latlng, {content: '<p>Hello world!<br />This is a nice popup.</p>'}).openOn(map)
+        });*/
+        var marker = {};
+        const apiKey = "AAPK920a0bb6164f4771baac441d0777575211yFWL2LGNrd0dDnqiWYxTHLbFtOeOkNSLpat_-3ep2q84eDxGvbV_Ipyn6WCPhi"
+        const layerGroup = L.layerGroup().addTo(map);
+
+        map.on('click', function(e){
+            if (marker != undefined) {
+                map.removeLayer(marker);
+            };
+            marker = new L.marker(e.latlng, {draggable:true}).addTo(map);
+            L.esri.Geocoding
+                .reverseGeocode({
+                    apikey: apiKey
+                })
+                .latlng(e.latlng)
+
+                .run(function (error, result) {
+                    if (error) {
+                        return;
+                    }
+
+                    layerGroup.clearLayers();
+
+                    console.log(result)
+                    console.log(result.address.CntryName)
+                });
 
 
 
-
-
+               // console.log(typeof bitch)
+                //console.log(bitch)
+               // console.log(bitch)
+        });
 
     </script>
 
