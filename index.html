@@ -8,8 +8,10 @@
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
             integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
             crossorigin=""></script>
+    <script src="./lib/d3.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CIS Project</title>
     <style>
         #map { height: 98vh; width: 100%;}
     </style>
@@ -17,16 +19,53 @@
 <body>
 <div id="map">
     <script>
+        const coords = "./Data/average-latitude-longitude-countries.csv";
+
+
         bounds = new L.LatLngBounds(new L.LatLng(49.5, -11.3), new L.LatLng(61.2, 2.5));
         var map = new L.map('map').setView([0, 0], 0);
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 6,
+            maxZoom: 7,
             minZoom: 3,
             attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
         }).addTo(map);
         // https://gis.stackexchange.com/questions/179630/setting-bounds-and-making-map-bounce-back-if-moved-away
         map.setMaxBounds(map.getBounds());
+
+        //icons
+        var female = L.icon({
+            iconUrl: './Assets/female-icon.png',
+            iconSize:     [38, 60], // size of the icon
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        var male = L.icon({
+            iconUrl: './Assets/male icon.png',
+            iconSize:     [38, 60], // size of the icon
+            iconAnchor:   [35, 94], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+
+
+        Promise.all([
+            d3.csv(coords)
+        ]).then(data => {
+            const shit = data[0]
+            shit.forEach((x, i) =>
+                L.marker([x.Latitude, x.Longitude], {icon: female}).addTo(map).bindPopup(x.Country)
+            )
+            shit.forEach((x, i) =>
+                L.marker([x.Latitude, x.Longitude], {icon: male}).addTo(map).bindPopup(x.Country)
+            )
+        })
+
+
+
+
+
+
 
     </script>
 
