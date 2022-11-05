@@ -27,6 +27,7 @@
         :root {
             --DropwDown_Width: 500px;
             --DropwDown_Height: 30px;
+            --DropwDown_SCROLL_Height: 200px;
             --MapWidth: 1000px;
             --MapHeight: 600px;
         }
@@ -108,6 +109,8 @@
         .dropdown-content a:hover {background-color: #f1f1f1}
         .dropdown:hover .dropdown-content {
             display: block;
+            max-height: var(--DropwDown_SCROLL_Height);
+            overflow-y: scroll;
         }
         .dropdown:hover .dropbtn {
             background-color: #3e8e41;
@@ -123,9 +126,12 @@
             <div class="dropdown">
                 <button class="dropbtn">Dropdown</button>
                 <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
+                    <a href="#" onclick = "console.log(1)">bnt 1</a>
+                    <a href="#" onclick = "console.log(2)">bnt 2</a>
+                    <a href="#" onclick = "console.log(3)">bnt 3</a>
+                    <a href="#" onclick = "console.log(4)">bnt 4</a>
+                    <a href="#" onclick = "console.log(5)">bnt 5</a>
+
                 </div>
             </div>
         </td>
