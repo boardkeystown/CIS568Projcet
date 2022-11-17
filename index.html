@@ -92,6 +92,7 @@
             font-size: 16px;
             border: none;
             cursor: pointer;
+            text: center;
             width: var(--DropwDown_Width);
             height: var(--DropwDown_Height);
             z-index: var(--DrowpDown_ZIndex);
@@ -182,19 +183,35 @@
     <tr>
         <td style="text-align: center">
             <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
-                <div class="dropdown-content">
-                    <a href="#" onclick="console.log(1)">bnt 1</a>
-                    <a href="#" onclick="console.log(2)">bnt 2</a>
-                    <a href="#" onclick="console.log(3)">bnt 3</a>
-                    <a href="#" onclick="console.log(4)">bnt 4</a>
-                    <a href="#" onclick="console.log(5)">bnt 5</a>
-                </div>
+
+                <select class="dropbtn", id="menu">
+                     <option>Choose a Country</option>
+                </select>
+
+                <script>
+                    //button population function
+                    var select = document.getElementById("menu");
+                    //load wikipedia iso csv
+                    Promise.all([d3.csv('./Data/wikipedia-iso-country-codes.csv')
+                    ]).then(data=> {
+                        const countries = data[0]
+                        //console.log(countries)
+                        countries.forEach(element => {
+                            //console.log(element.Country)
+                            var el = document.createElement("option");
+                            el.textContent = element.Country
+                            el.value = element.Numeric_code
+                            select.appendChild(el);
+                        })
+                    })
+
+                </script>
+
             </div>
         </td>
         <td style="text-align: center">
             <div class="dropdown">
-                <button class="dropbtn"> Button</button>
+                <button class="dropbtn"> GO!!!</button>
             </div>
         </td>
     </tr>
