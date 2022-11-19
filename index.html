@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>CIS Project</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/favcon.png" />
 
-    <link rel="shortcut icon" type="image/x-icon" href="Assets/favcon.png" />
+    <!--  custom CSS  -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
 
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
@@ -13,8 +18,6 @@
             integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
             crossorigin=""></script>
 
-
-
     <!-- Esri Leaflet Geocoder -->
     <link
             rel="stylesheet"
@@ -24,160 +27,15 @@
     <script src="https://unpkg.com/esri-leaflet"></script>
     <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
 
-
+    <!--  DJ3 JS  -->
     <script src="./lib/d3.js"></script>
-    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="./lib/topojson.v1.min.js"></script>
 
-
-    <meta charset="UTF-8">
-    <title>CIS Project</title>
-    <style>
-        :root {
-            --DropwDown_Width: 500px;
-            --DropwDown_Height: 30px;
-            --DropwDown_SCROLL_Height: 200px;
-            --DrowpDown_ZIndex: 5000;
-            --MapWidth: 1000px;
-            --MapHeight: 600px;
-        }
-
-        body {
-            background: linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
-            linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
-            linear-gradient(315deg, black 25%, transparent 25%),
-            linear-gradient(45deg, black 25%, transparent 25%);
-            background-size: 2em 2em;
-            background-color: #232323;
-        }
-
-        #map {
-            /*https://calculateaspectratio.com/*/
-            /*4:3*/
-            width: var(--MapWidth);
-            height: var(--MapHeight);
-            z-index: auto;
-        }
-
-        div.leaflet-control-attribution.leaflet-control {
-            display: none;
-        }
-
-        table, th, td {
-            margin: 0 auto 0 auto; /* or margin: 0 auto 0 auto */
-            border: 1px dashed green;
-        }
-
-        #mapContent {
-            /*margin: 0 auto;*/
-        }
-
-        #graph1 {
-            /*margin: 0 auto;*/
-            color: green;
-            text-align: center;
-        }
-
-        #graph2 {
-            /*margin: 0 auto;*/
-            color: green;
-            text-align: center;
-        }
-
-        /*BASIC BUTTON DROP DOWN
-          https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button
-        */
-        .dropbtn {
-            background-color: green;
-            color: white;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            text: center;
-            width: var(--DropwDown_Width);
-            height: var(--DropwDown_Height);
-            z-index: var(--DrowpDown_ZIndex);
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            z-index: var(--DrowpDown_ZIndex);
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: var(--DropwDown_Width);
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: var(--DrowpDown_ZIndex);
-            text-align: center;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            width: inherit;
-            z-index: var(--DrowpDown_ZIndex);
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-            max-height: var(--DropwDown_SCROLL_Height);
-            overflow-y: scroll;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
-
-        /*GEOJSON OVERLAY*/
-        svg, svg * {
-            pointer-events: all;
-        }
-        path {
-            pointer-events: all;
-        }
-
-        /*path{*/
-        /*    fill:none;*/
-        /*    stroke:black;*/
-        /*    pointer-events: none;*/
-        /*}*/
-
-
-        #mapSVG {
-            /*position: relative;*/
-        }
-
-
-
-        .mapPath {
-            fill: #000;
-            fill-opacity: .1;
-            /*stroke: #000000;*/
-            stroke: steelblue;
-            stroke-width: 1px;
-            pointer-events: all;
-        }
-
-        .mapPath:hover {
-            fill: orange !important;
-            fill-opacity: 1.0 !important;
-            cursor: cell !important;
-        }
-
-    </style>
+    <!--  Our JS  -->
+    <script src="./js/dropdown.js"></script>
+    <script src="js/mapcontent.js" defer></script>
 </head>
 <body>
-
-
 
 <table>
     <tr>
@@ -187,24 +45,8 @@
                 <select class="dropbtn", id="menu">
                      <option>Choose a Country</option>
                 </select>
-
                 <script>
-                    //button population function
-                    var select = document.getElementById("menu");
-                    //load wikipedia iso csv
-                    Promise.all([d3.csv('./Data/wikipedia-iso-country-codes.csv')
-                    ]).then(data=> {
-                        const countries = data[0]
-                        //console.log(countries)
-                        countries.forEach(element => {
-                            //console.log(element.Country)
-                            var el = document.createElement("option");
-                            el.textContent = element.Country
-                            el.value = element.Numeric_code
-                            select.appendChild(el);
-                        })
-                    })
-
+                    dropdown();
                 </script>
 
             </div>
@@ -219,148 +61,7 @@
         <td colspan="2">
             <div id="mapContent">
                 <div id="map">
-                    <script>
-                        const geo_json = "./data/custom.geo.json";
-                        const coords = "./Data/average-latitude-longitude-countries.csv";
-
-                        const bounds = new L.LatLngBounds(new L.LatLng(-89.93411921886802, -1326.0937500000002), new L.LatLng(89.93411921886802, 1326.0937500000002));
-
-                        var map = new L.map('map').setView([0, 0], 0);
-
-                        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-                            maxZoom: 7,
-                            minZoom: 3,
-                            attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-                        }).addTo(map);
-                        //L.Control.geocoder().addTo(map);
-                        // https://gis.stackexchange.com/questions/179630/setting-bounds-and-making-map-bounce-back-if-moved-away
-                        map.setMaxBounds(bounds);
-
-                        // console.log(map.getBounds());
-                        //icons
-                        var female = L.icon({
-                            iconUrl: './Assets/female-icon.png',
-                            iconSize: [38, 60], // size of the icon
-                            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-                            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-                        });
-                        var male = L.icon({
-                            iconUrl: './Assets/male icon.png',
-                            iconSize: [38, 60], // size of the icon
-                            iconAnchor: [35, 94], // point of the icon which will correspond to marker's location
-                            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-                        });
-
-                        map.createPane("D3GEOJSON");
-
-                        map.getPanes().D3GEOJSON.style.pointerEvents = 'all';
-
-                        // var svg = d3.select(map.getPanes().markerPane)
-                        // var svg = d3.select(map.getPanes().tilePane)
-                        // var svg = d3.select(map.getPanes().svgOverlay)
-                        // var svg = d3.select(map.getPanes().overlayPane)
-                        var svg = d3.select(map.getPanes().D3GEOJSON)
-                                    .append("svg").attr("id","mapSVG")
-
-
-
-                        var g = svg.append("g")
-                            .attr("class", "leaflet-zoom-hide");
-
-                        Promise.all([
-                            d3.csv(coords),
-                            d3.json(geo_json)
-
-                        ]).then(data => {
-
-                            //Leaflet marks
-                            const shit = data[0]
-
-                            shit.forEach((x, i) =>
-                                L.marker([x.Latitude, x.Longitude], {icon: female}).addTo(map).bindPopup(x.Country)
-                            )
-                            shit.forEach((x, i) =>
-                                L.marker([x.Latitude, x.Longitude], {icon: male}).addTo(map).bindPopup(x.Country)
-                            )
-
-
-                            // //GEO JSON
-                            const collection = data[1]
-
-
-                            // console.log(collection)
-
-                            var transform = d3.geoTransform({point: projectPoint});
-                            var path = d3.geoPath().projection(transform);
-
-                            var feature = g.selectAll("path")
-                                        .data(collection.features)
-                                        .enter()
-                                        .append("path")
-                                        .attr("class","mapPath")
-
-                            function reset() {
-                                var bounds2 = path.bounds(collection),
-                                    topLeft = bounds2[0],
-                                    bottomRight = bounds2[1];
-                                 svg.attr("width", bottomRight[0] - topLeft[0])
-                                    .attr("height", bottomRight[1] - topLeft[1])
-                                    .style("left", topLeft[0] + "px")
-                                    .style("top", topLeft[1] + "px");
-
-                                g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
-                                feature.attr("pointer-events","all").attr("d", path);
-                            }
-                            // Use Leaflet to implement a D3 geometric transformation.
-                            function projectPoint(x, y) {
-                                var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-                                this.stream.point(point.x, point.y);
-                            }
-
-                            map.on('zoomend', reset);
-                            map.on("viewreset", reset);
-                            reset();
-                        })
-
-
-
-
-                        /*map.on('click', function(e) {
-                            var temp = e.latlng
-
-                            //var popup = L.popup(e.latlng, {content: '<p>Hello world!<br />This is a nice popup.</p>'}).openOn(map)
-                        });*/
-                        var marker = {};
-                        const apiKey = "AAPK920a0bb6164f4771baac441d0777575211yFWL2LGNrd0dDnqiWYxTHLbFtOeOkNSLpat_-3ep2q84eDxGvbV_Ipyn6WCPhi"
-                        const layerGroup = L.layerGroup().addTo(map);
-
-                        map.on('click', function (e) {
-
-                            if (marker != undefined) {
-                                map.removeLayer(marker);
-                            }
-                            ;
-                            marker = new L.marker(e.latlng, {draggable: true}).addTo(map);
-                            L.esri.Geocoding
-                                .reverseGeocode({
-                                    apikey: apiKey
-                                })
-                                .latlng(e.latlng)
-
-                                .run(function (error, result) {
-                                    if (error) {
-                                        return;
-                                    }
-
-                                    layerGroup.clearLayers();
-
-                                    console.log(result)
-                                    console.log(result.address.CntryName)
-                                });
-
-                        });
-
-                    </script>
+<!--                    <script></script>-->
                 </div>
             </div>
         </td>

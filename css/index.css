@@ -1,0 +1,121 @@
+
+:root {
+    --DropwDown_Width: 500px;
+    --DropwDown_Height: 30px;
+    --DropwDown_SCROLL_Height: 200px;
+    --DrowpDown_ZIndex: 5000;
+    --MapWidth: 1000px;
+    --MapHeight: 600px;
+}
+
+#map {
+    /*https://calculateaspectratio.com/*/
+    /*4:3*/
+    width: var(--MapWidth);
+    height: var(--MapHeight);
+    z-index: auto;
+}
+
+div.leaflet-control-attribution.leaflet-control {
+    display: none;
+}
+
+table, th, td {
+    margin: 0 auto 0 auto; /* or margin: 0 auto 0 auto */
+    border: 1px dashed green;
+}
+
+#mapContent {
+    /*margin: 0 auto;*/
+}
+
+#graph1 {
+    /*margin: 0 auto;*/
+    color: green;
+    text-align: center;
+}
+
+#graph2 {
+    /*margin: 0 auto;*/
+    color: green;
+    text-align: center;
+}
+
+/*BASIC BUTTON DROP DOWN
+  https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button
+*/
+.dropbtn {
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text: center;
+    width: var(--DropwDown_Width);
+    height: var(--DropwDown_Height);
+    z-index: var(--DrowpDown_ZIndex);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: var(--DrowpDown_ZIndex);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: var(--DropwDown_Width);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: var(--DrowpDown_ZIndex);
+    text-align: center;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: inherit;
+    z-index: var(--DrowpDown_ZIndex);
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    max-height: var(--DropwDown_SCROLL_Height);
+    overflow-y: scroll;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+/*GEOJSON OVERLAY*/
+svg, svg * {
+    pointer-events: all;
+}
+path {
+    pointer-events: all;
+}
+
+#mapSVG {
+    /*position: relative;*/
+}
+.mapPath {
+    fill: #000;
+    fill-opacity: .1;
+    /*stroke: #000000;*/
+    stroke: steelblue;
+    stroke-width: 1px;
+    pointer-events: all;
+}
+.mapPath:hover {
+    fill: orange !important;
+    fill-opacity: 1.0 !important;
+    cursor: cell !important;
+}
