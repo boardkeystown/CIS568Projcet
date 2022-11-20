@@ -2,7 +2,7 @@
 function dropdown() {
     const select = document.getElementById("menu");
 //load wikipedia iso csv
-    Promise.all([d3.csv('./../Data/wikipedia-iso-country-codes.csv')
+    Promise.all([d3.csv('./../data/wikipedia-iso-country-codes.csv')
     ]).then(data => {
         const countries = data[0]
         //console.log(countries)
