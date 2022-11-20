@@ -20,13 +20,13 @@ map.setMaxBounds(bounds);
 // console.log(map.getBounds());
 //icons
 var female = L.icon({
-    iconUrl: './Assets/female-icon.png',
+    iconUrl: './assets/female-icon.png',
     iconSize: [38, 60], // size of the icon
     iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
     popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var male = L.icon({
-    iconUrl: './Assets/male icon.png',
+    iconUrl: './assets/male icon.png',
     iconSize: [38, 60], // size of the icon
     iconAnchor: [35, 94], // point of the icon which will correspond to marker's location
     popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
