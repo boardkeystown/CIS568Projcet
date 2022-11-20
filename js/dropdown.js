@@ -1,9 +1,10 @@
 //button population function
 function dropdown() {
-    const select = document.getElementById("menu");
+
 //load wikipedia iso csv
     Promise.all([d3.csv('./../data/wikipedia-iso-country-codes.csv')
     ]).then(data => {
+        const select = document.getElementById("menu");
         const countries = data[0]
         //console.log(countries)
         countries.forEach(element => {
