@@ -1,6 +1,5 @@
-const geo_json = "./../data/custom.geo.json";
-const coords = "./../data/average-latitude-longitude-countries.csv";
-
+const geo_json = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/custom.geo.json";
+const coords = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/average-latitude-longitude-countries.csv";
 
 const bounds = new L.LatLngBounds(new L.LatLng(-89.93411921886802, -1326.0937500000002), new L.LatLng(89.93411921886802, 1326.0937500000002));
 
