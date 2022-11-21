@@ -11,8 +11,8 @@
 #map {
     /*https://calculateaspectratio.com/*/
     /*4:3*/
-    width: var(--MapWidth);
-    height: var(--MapHeight);
+    width: 52.75%;
+    height:90vh;
     z-index: auto;
 }
 
@@ -22,7 +22,7 @@ div.leaflet-control-attribution.leaflet-control {
 
 table, th, td {
     margin: 0 auto 0 auto; /* or margin: 0 auto 0 auto */
-    border: 1px dashed green;
+    border: 1px dashed white;
 }
 
 #mapContent {
@@ -31,13 +31,13 @@ table, th, td {
 
 #graph1 {
     /*margin: 0 auto;*/
-    color: green;
+    color: #a970ff;
     text-align: center;
 }
 
 #graph2 {
     /*margin: 0 auto;*/
-    color: green;
+    color: #a970ff;
     text-align: center;
 }
 
@@ -45,13 +45,13 @@ table, th, td {
   https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button
 */
 .dropbtn {
-    background-color: green;
+    background-color: #634dab;
     color: white;
     font-size: 16px;
     border: none;
     cursor: pointer;
     text: center;
-    width: var(--DropwDown_Width);
+    width: 100%;
     height: var(--DropwDown_Height);
     z-index: var(--DrowpDown_ZIndex);
 }
@@ -65,7 +65,7 @@ table, th, td {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #634dab;
     min-width: var(--DropwDown_Width);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: var(--DrowpDown_ZIndex);
@@ -82,7 +82,7 @@ table, th, td {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1
+    background-color: #634dab
 }
 
 .dropdown:hover .dropdown-content {
@@ -92,7 +92,7 @@ table, th, td {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #634dab;
 }
 
 /*GEOJSON OVERLAY*/
@@ -110,7 +110,7 @@ path {
     fill: #000;
     fill-opacity: .1;
     /*stroke: #000000;*/
-    stroke: steelblue;
+    stroke: #6e46b4;
     stroke-width: 1px;
     pointer-events: all;
 }
