@@ -4,8 +4,8 @@ const coords = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/ma
 const bounds = new L.LatLngBounds(new L.LatLng(-89.93411921886802, -1326.0937500000002), new L.LatLng(89.93411921886802, 1326.0937500000002));
 
 var map = new L.map('map').setView([0, 0], 0);
-
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+//L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 7,
     minZoom: 3,
     attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
@@ -51,11 +51,11 @@ var g = svg.append("g")
     .attr("class", "leaflet-zoom-hide");
 
 Promise.all([
-    d3.csv(coords),
+    //d3.csv(coords),
     d3.json(geo_json)
 
 ]).then(data => {
-
+    /*
     //Leaflet marks
     const shit = data[0]
 
@@ -68,8 +68,9 @@ Promise.all([
     shit.forEach((x, i) =>
         L.marker([x.Latitude, x.Longitude], {icon: male}).addTo(map).bindPopup(x.Country)
     )
-
+    */
     // //GEO JSON
+    /*
     const collection = data[1]
     // console.log(collection)
     var transform = d3.geoTransform({point: projectPoint});
@@ -103,6 +104,12 @@ Promise.all([
     map.on('zoomend', reset);
     map.on("viewreset", reset);
     reset();
+    */
+
+    // geojson map attempt no 2
+    console.log(data)
+    L.geoJson(data).addTo(map);
+
 })
 
 

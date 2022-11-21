@@ -38,7 +38,7 @@
 <body>
 
 
-
+<!--
 <table>
     <tr>
         <td style="text-align: center">
@@ -63,7 +63,7 @@
         <td colspan="2">
             <div id="mapContent">
                 <div id="map">
-<!--                    <script></script>-->
+                 <script></script>
                 </div>
             </div>
         </td>
@@ -82,7 +82,25 @@
     </tr>
 
 </table>
+-->
+<div class="body">
+    <div class="dropdown">
+        <select class="dropbtn", id="menu", onchange="changeFunc()">
+            <option>Choose a Country</option>
+        </select>
+        <script>
+            dropdown();
+        </script>
 
-
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn"> GO!!!</button>
+    </div>
+    <div id="mapContent">
+        <div id="map">
+            <script></script>
+        </div>
+    </div>
+</div>
 </body>
 </html>
