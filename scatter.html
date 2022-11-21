@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="..\..\lib\d3.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <style>
+        :root {
+            --graphBG: #fdf6e3;
+        }
+        body {
+            background: #2b2b2b;
+        }
+    </style>
+</head>
+<body>
+    <div id="scatter">
+        <script>
+            //Given a county, show a scatter plot of GDP and human height
+
+            const margin = {top: 10, right: 30, bottom: 30, left: 60};
+            const width = 600 - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const data_source = "./data/avg_height_human_country_gdp.csv";
+
+            //Load Data
+            Promise.all(
+                [
+                    d3.csv(data_source,d=>(
+                        {
+                            country: d['Entity'],
+                            country_code_alpha3: d['Code'],
+                            country_code_alpha2: d['code_alpha2'],
+                            year: Number(d['Year']),
+                            male_height_cm: Number(d['Mean male height (cm)']),
+                            female_height_cm: Number(d['Mean female height (cm)']),
+                            male_height_change_rate: Number(d['change in male height']),
+                            female_height_change_rate: Number(d['change in female height']),
+                            female_height_change_rate: Number(d['change in female height']),
+                            GDP_change_rate: Number(d['GDP annual growth']),
+                            GDP_change_USD: Number(d['GDP annual USD'])
+                        }
+                    ))
+                ]
+            ).then(data=>{
+                let theData = data[0];
+                // console.table(d);
+                console.log(theData);
+
+                const svg =  d3.select("#scatter")
+                                .append("svg")
+                                .attr("width", width + margin.left + margin.right)
+                                .attr("height", height + margin.top + margin.bottom);
+                //background of graph
+                svg.append("rect")
+                    .attr("width", "100%")
+                    .attr("height", "100%")
+                    .attr("fill", "var(--graphBG)");
+
+
+                // the things
+
+                const GDP_change_rate = d3.extent(theData,d=> {
+                   return d.GDP_change_rate
+                });
+
+                const years_extent = d3.extent(theData,d=> {
+                    return d.year
+                });
+
+                // Add X Axis
+                let xAxisScale = d3.scaleLinear()
+                    .domain(GDP_change_rate)
+                    .range([margin.left,width-margin.right]);
+
+                svg.append("g")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(xAxisScale));
+
+                //Add Y Axis
+                let yAxisScale = d3.scaleLinear()
+                    .domain(years_extent)
+                    .range([height,0]);
+
+                // Add Y Axis
+                svg.append("g")
+                    .attr("transform",`translate(${margin.left},0)`)
+                    .call(d3.axisLeft(yAxisScale));
+                svg.append('g')
+                    .selectAll("dot")
+                    .data(theData)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function (d) { return xAxisScale(d.GDP_change_rate); } )
+                    .attr("cy", function (d) { return yAxisScale(d.year); } )
+                    .attr("r", 1.5)
+                    .style("fill", "#69b3a2")
+
+                //Add Data
+                svg.append("g")
+                    .attr("id","data-points")
+                    .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+            });
+        </script>
+    </div>
+</body>
+</html>
