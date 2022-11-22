@@ -19,10 +19,9 @@
         <script>
             //Given a county, show a scatter plot of GDP and human height
 
-            const margin = {top: 10, right: 30, bottom: 30, left: 60};
+            const margin = {top: 20, right: 30, bottom: 10, left: 50};
             const width = 600 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
-
             const data_source = "./data/avg_height_human_country_gdp.csv";
 
             //Load Data
@@ -33,7 +32,7 @@
                             country: d['Entity'],
                             country_code_alpha3: d['Code'],
                             country_code_alpha2: d['code_alpha2'],
-                            year: Number(d['Year']),
+                            year: new Date(d['Year']),
                             male_height_cm: Number(d['Mean male height (cm)']),
                             female_height_cm: Number(d['Mean female height (cm)']),
                             male_height_change_rate: Number(d['change in male height']),
@@ -49,6 +48,13 @@
                 // console.table(d);
                 console.log(theData);
 
+                theData = theData.filter(d=> {
+                    if (d.country_code_alpha2 === "IQ") {
+                        console.log(d)
+                        return d;
+                    }
+                })
+
                 const svg =  d3.select("#scatter")
                                 .append("svg")
                                 .attr("width", width + margin.left + margin.right)
@@ -59,9 +65,7 @@
                     .attr("height", "100%")
                     .attr("fill", "var(--graphBG)");
 
-
                 // the things
-
                 const GDP_change_rate = d3.extent(theData,d=> {
                    return d.GDP_change_rate
                 });
@@ -71,9 +75,15 @@
                 });
 
                 // Add X Axis
+                const GDP_change_rate_min = GDP_change_rate[0]
+                const GDP_change_rate_max = GDP_change_rate[0]
+
+                console.log(GDP_change_rate)
+
                 let xAxisScale = d3.scaleLinear()
                     .domain(GDP_change_rate)
-                    .range([margin.left,width-margin.right]);
+                    .range([margin.left,width]);
+                xAxisScale.clamp(true);
 
                 svg.append("g")
                     .attr("transform", "translate(0," + height + ")")
@@ -82,12 +92,14 @@
                 //Add Y Axis
                 let yAxisScale = d3.scaleLinear()
                     .domain(years_extent)
-                    .range([height,0]);
+                    .range([height,margin.top]);
 
                 // Add Y Axis
                 svg.append("g")
                     .attr("transform",`translate(${margin.left},0)`)
-                    .call(d3.axisLeft(yAxisScale));
+                    .call(d3.axisLeft(yAxisScale).tickFormat(d3.timeFormat("%Y")));
+
+                //Add GDP
                 svg.append('g')
                     .selectAll("dot")
                     .data(theData)
@@ -96,13 +108,15 @@
                     .attr("cx", function (d) { return xAxisScale(d.GDP_change_rate); } )
                     .attr("cy", function (d) { return yAxisScale(d.year); } )
                     .attr("r", 1.5)
-                    .style("fill", "#69b3a2")
+                    .style("fill", "#0c6408")
 
-                //Add Data
-                svg.append("g")
-                    .attr("id","data-points")
-                    .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
+                //Add male and female rate of change height
+
+                // //Add Data
+                // svg.append("g")
+                //     .attr("id","data-points")
+                //     .attr("transform",
+                //         "translate(" + margin.left + "," + margin.top + ")");
 
             });
         </script>
