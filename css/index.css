@@ -97,6 +97,7 @@ div.leaflet-control-attribution.leaflet-control {
     justify-content: center;
     line-height: 2rem;
     border: green 1px solid;
+    cursor: all-scroll;
 }
 
 .float-window-nav-title {
