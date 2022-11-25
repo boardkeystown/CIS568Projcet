@@ -31,26 +31,52 @@
     <script src="./lib/d3.js"></script>
     <script src="./lib/topojson.v1.min.js"></script>
 
+
+    <!--  Jquery -->
+    <link rel="stylesheet" href="./lib/jquery-ui.css">
+    <script src="./lib/jquery-3.6.0.js"></script>
+    <script src="./lib/jquery-ui.js"></script>
+
     <!--  Our JS  -->
     <script src="./js/dropdown.js"></script>
-    <script src="js/mapcontent.js" defer></script>
+    <script src="./js/mapcontent.js" defer></script>
+    <script src="./js/mkScatter.js"></script>
+    <script src="./js/windowManager.js" defer></script>
+
 </head>
 <body>
 
 <div class="main-container">
-    <div class="map-tool-buttons">
-        <select class="dropdown" , id="menu" , onchange="changeFunc()">
-            <option>Choose a Country</option>
-        </select>
-        <script>
-            dropdown();
-        </script>
-        <div class="dropdown">
-            <button class="dropdown dropdown-btn"> GO!!!</button>
+    <div id="fooelm">
+
+        <div class="map-tool-buttons">
+            <select class="dropdown" , id="menu" , onchange="changeFunc()">
+                <option>Choose a Country</option>
+            </select>
+            <script>
+                dropdown();
+            </script>
+            <div class="dropdown">
+                <button class="dropdown dropdown-btn"> GO!!!</button>
+            </div>
         </div>
-    </div>
-    <div id="map-content">
-        <div id="map"></div>
+        <div id="map-content">
+            <div id="map"></div>
+        </div>
+
+        <div class="context-bar" id="ui-context-bar">
+
+            <script>
+                $(function () {
+                    $("#candrag").draggable()
+
+                });
+            </script>
+            <div class="context-bar-item ui-widget-content" id="candrag">
+                <button class="" id="add-button"> ID</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
