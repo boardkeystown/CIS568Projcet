@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CIS Project</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/favcon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/favcon.png"/>
 
     <!--  custom CSS  -->
     <link rel="stylesheet" href="./css/base.css">
@@ -37,70 +37,22 @@
 </head>
 <body>
 
-
-<!--
-<table>
-    <tr>
-        <td style="text-align: center">
-            <div class="dropdown">
-
-                <select class="dropbtn", id="menu">
-                     <option>Choose a Country</option>
-                </select>
-                <script>
-                    dropdown();
-                </script>
-
-            </div>
-        </td>
-        <td style="text-align: center">
-            <div class="dropdown">
-                <button class="dropbtn"> GO!!!</button>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <div id="mapContent">
-                <div id="map">
-                 <script></script>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div id="graph1">
-                GRAPH 1
-            </div>
-        </td>
-        <td>
-            <div id="graph2">
-                GRAPH 2
-            </div>
-        </td>
-    </tr>
-
-</table>
--->
-<div class="body">
-    <div class="dropdown">
-        <select class="dropbtn", id="menu", onchange="changeFunc()">
+<div class="main-container">
+    <div class="map-tool-buttons">
+        <select class="dropdown" , id="menu" , onchange="changeFunc()">
             <option>Choose a Country</option>
         </select>
         <script>
             dropdown();
         </script>
-
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn"> GO!!!</button>
-    </div>
-    <div id="mapContent">
-        <div id="map">
-            <script></script>
+        <div class="dropdown">
+            <button class="dropdown dropdown-btn"> GO!!!</button>
         </div>
     </div>
+    <div id="map-content">
+        <div id="map"></div>
+    </div>
 </div>
+
 </body>
 </html>
