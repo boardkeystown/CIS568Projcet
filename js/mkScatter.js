@@ -25,7 +25,8 @@ function mkScatter(countryAlpha2="",idName="") {
                     male_height_change_rate: Number(d['change in male height']),
                     female_height_change_rate: Number(d['change in female height']),
                     GDP_change_rate: Number(d['GDP annual growth']),
-                    GDP_change_USD: Number(d['GDP annual USD'])
+                    GDP_change_USD: Number(d['GDP annual USD']),
+                    Male_to_female_height_ratio: Number(d['Male-to-female height ratio']),
                 }
             ))
         ]
