@@ -5,6 +5,8 @@
     flex-direction: column;
     width: 100%;
     margin: 0;
+    border: #c387ff 3px solid;
+    border-radius: 4px;
 }
 
 .map-tool-buttons {
@@ -46,6 +48,7 @@
     flex-direction: column;
     justify-content: center;
     justify-items: center;
+
 }
 
 #map {
@@ -69,13 +72,24 @@ div.leaflet-control-attribution.leaflet-control {
     display: flex;
     flex-direction: row;
     background: #191236;
-    border: #624cab 1px solid;
+    border: #c387ff 1px solid;
+
 }
 
 .context-bar-item {
     display: flex;
     flex-direction: column;
     width: fit-content;
+    padding-right: 0.3rem;
+
+}
+
+.content-bar-item-button {
+    background-color: #634dab;
+    color: white;
+    border: 0px solid;
+    line-height: 2rem;
+    ;
 }
 
 
@@ -89,7 +103,8 @@ div.leaflet-control-attribution.leaflet-control {
     justify-content: center;
     /*SEE size in mKScatter*/
     width: 700px;
-
+    padding-bottom: 0;
+    background: #191236;
 
 }
 
@@ -99,7 +114,6 @@ div.leaflet-control-attribution.leaflet-control {
     justify-items: center;
     justify-content: center;
     line-height: 2rem;
-    border: green 1px solid;
     cursor: all-scroll;
 }
 
@@ -111,13 +125,19 @@ div.leaflet-control-attribution.leaflet-control {
     display: inline-block;
     width: 100%;
     text-align: center;
-    border: red 1px solid;
+    color: #c387ff;
+    background: #191236;
+
 }
 
 .float-window-nav-btns {
     display: flex;
     float: right;
-    border: yellow 1px solid;
+
+}
+.float-window-indv-buttons{
+    border: #c387ff 2px solid;
+    border-radius: 5px;
 }
 
 .float-window-content {
