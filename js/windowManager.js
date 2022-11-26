@@ -22,8 +22,8 @@ function addToBar(countryAlpha2) {
                     ${countryAlpha2}-Scatter
                 </div>
                 <div class="float-window-nav-btns">
-                    <button id="${countryAlpha2}-scatter-min-btn"> &nbsp;_&nbsp; </button>
-                    <button id="${countryAlpha2}-scatter-close-btn"> &nbsp;X&nbsp; </button>
+                    <button id="${countryAlpha2}-scatter-min-btn" class="float-window-indv-buttons"> &nbsp;_&nbsp; </button>
+                    <button id="${countryAlpha2}-scatter-close-btn" class="float-window-indv-buttons"> &nbsp;X&nbsp; </button>
                 </div>
             </div>
             <div class="float-window-content" id="${countryAlpha2}-scatter">
@@ -36,7 +36,7 @@ function addToBar(countryAlpha2) {
     let $windowIcon = $(
         `
         <div class="context-bar-item" id="${countryAlpha2}-scatter-icon">
-            <button id="${countryAlpha2}-scatter-icon-btn"> ${countryAlpha2}-scatter </button>
+            <button id="${countryAlpha2}-scatter-icon-btn" class="content-bar-item-button"> ${countryAlpha2}-scatter </button>
         </div>
         `
     );

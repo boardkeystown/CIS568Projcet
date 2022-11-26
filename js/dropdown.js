@@ -30,6 +30,11 @@ function changeFunc() {
 
 }
 
+function zoom(){
+    map.setZoom(3);
+
+}
+
 function relocate(code){
     Promise.all([
         d3.csv(coords)
@@ -42,6 +47,7 @@ function relocate(code){
             if(code === element.CountryCode){
                    var latlng = L.latLng(element.Latitude, element.Longitude);
                     map.flyTo(latlng);
+                    
 
             }
         })
