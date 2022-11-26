@@ -25,6 +25,9 @@ function changeFunc() {
     var selected = selectBox.options[selectBox.selectedIndex].value;
 
     relocate(selected);
+
+    addToBar(selected)
+
 }
 
 function relocate(code){
