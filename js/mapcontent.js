@@ -1,5 +1,6 @@
 const geo_json = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/custom.geo.json";
 const coords = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/average-latitude-longitude-countries.csv";
+const data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
 
 const bounds = new L.LatLngBounds(new L.LatLng(-89.93411921886802, -1326.0937500000002), new L.LatLng(89.93411921886802, 1326.0937500000002));
 
@@ -34,7 +35,7 @@ var male = L.icon({
 });
 
 
-map.createPane("D3GEOJSON");
+// map.createPane("D3GEOJSON");
 // map.getPanes().D3GEOJSON.style.pointerEvents = 'all';
 // map.getPanes().D3GEOJSON = 'mapPath';
 
@@ -44,15 +45,29 @@ map.createPane("D3GEOJSON");
 // var svg = d3.select(map.getPanes().svgOverlay)
 // var svg = d3.select(map.getPanes().overlayPane)
 
-var svg = d3.select(map.getPanes().D3GEOJSON)
-    .append("svg").attr("id", "mapSVG")
-
-var g = svg.append("g")
-    .attr("class", "leaflet-zoom-hide");
+// var svg = d3.select(map.getPanes().D3GEOJSON)
+//     .append("svg").attr("id", "mapSVG")
+//
+// var g = svg.append("g")
+//     .attr("class", "leaflet-zoom-hide");
 
 Promise.all([
     //d3.csv(coords),
-    d3.json(geo_json)
+    d3.json(geo_json),
+    d3.csv(sp_data_source, d => (
+        {
+            country: d['Entity'],
+            country_code_alpha3: d['Code'],
+            country_code_alpha2: d['code_alpha2'],
+            year: new Date(d['Year']),
+            male_height_cm: Number(d['Mean male height (cm)']),
+            female_height_cm: Number(d['Mean female height (cm)']),
+            male_height_change_rate: Number(d['change in male height']),
+            female_height_change_rate: Number(d['change in female height']),
+            GDP_change_rate: Number(d['GDP annual growth']),
+            GDP_change_USD: Number(d['GDP annual USD'])
+        }
+    ))
 
 ]).then(data => {
     /*
@@ -107,8 +122,44 @@ Promise.all([
     */
 
     // geojson map attempt no 2
+    const jsonData = data[0];
+    const csvData = data[1];
+
+    console.log("PISS")
+    let temp = []
+    csvData.filter(d => {
+        temp.push(d.country_code_alpha2);
+    });
+    let alpah2WeHave2 = temp.filter(function (value, index, self) {
+        return self.indexOf(value) === index;
+    })
+    console.log(alpah2WeHave2)
+    console.log("PISS")
     console.log(data)
-    L.geoJson(data).addTo(map);
+
+
+    function styles(features) {
+        // console.log("HERER")
+        // console.log(features);
+        // if (!alpah2WeHave2.includes(features.properties.iso_a2_eh)) {
+        //     console.log(features.properties.iso_a2_eh)
+        //     console.log(alpah2WeHave2.includes(features.properties.iso_a2_eh))
+        // }
+
+
+        // Try to filter out countires we do not have!
+        if (!alpah2WeHave2.includes(features.properties.iso_a2_eh)) return {
+            fillColor: "rgba(232,0,0,0)",
+            fillOpacity: "rgba(169,75,75,0)",
+            color: "rgba(169,75,75,0)",
+        };
+    }
+
+    let geoJsonMaker = L.geoJson(data, {style: styles});
+    geoJsonMaker.addTo(map);
+
+
+    // L.geoJson(data).addTo(map);
 
 })
 
