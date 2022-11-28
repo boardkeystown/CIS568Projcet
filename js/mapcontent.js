@@ -152,7 +152,7 @@ Promise.all([
 
     let colorScale = d3.scaleLinear()
         .domain([first,last])
-        .range(d3.quantize(d3.interpolateHcl("#0d47cc","#be0000"), 3));
+        .range(d3.quantize(d3.interpolateHcl("#00ff15","#be0000"), 2));
 
     function returnColorBasedOnCode(code) {
         let value = 0;
@@ -187,7 +187,7 @@ Promise.all([
                 // fillColor: "rgb(0,25,189)",
                 fillColor: `${returnColorBasedOnCode(features.properties.iso_a2_eh)}`,
                 fillOpacity: "0.3",
-                color: "rgba(193,134,254,0.5)",
+                color: "rgba(255,255,255, 0.75)",
             };
         }
     }
