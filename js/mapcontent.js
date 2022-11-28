@@ -1,6 +1,9 @@
 const geo_json = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/custom.geo.json";
 const coords = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/average-latitude-longitude-countries.csv";
+
 const data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
+
+const data_source_rate_change_per_country = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_rate_change_per_country_gdp.csv";
 
 const bounds = new L.LatLngBounds(new L.LatLng(-89.93411921886802, -1326.0937500000002), new L.LatLng(89.93411921886802, 1326.0937500000002));
 
@@ -68,6 +71,14 @@ Promise.all([
             GDP_change_USD: Number(d['GDP annual USD']),
             Male_to_female_height_ratio: Number(d['Male-to-female height ratio']),
         }
+    )),
+    d3.csv(data_source_rate_change_per_country, d=> (
+        {
+            country_code_alpha2: d['code_alpha2'],
+            change_rate_male: Number(d['change_rate_male']),
+            change_rate_female: Number(d['change_rate_female']),
+            change_rate_avg: Number(d['change_rate_avg']),
+        }
     ))
 
 ]).then(data => {
@@ -125,19 +136,34 @@ Promise.all([
     // geojson map attempt no 2
     const jsonData = data[0];
     const csvData = data[1];
+    const csvData_rates = data[2];
 
-    console.log("PISS")
     let temp = []
     csvData.filter(d => {
         temp.push(d.country_code_alpha2);
     });
+
     let alpah2WeHave2 = temp.filter(function (value, index, self) {
         return self.indexOf(value) === index;
     })
-    console.log(alpah2WeHave2)
-    console.log("PISS")
-    console.log(data)
 
+    let first = d3.extent(csvData_rates,d=> d.change_rate_male)[0]
+    let last = d3.extent(csvData_rates,d=> d.change_rate_male)[1]
+
+    let colorScale = d3.scaleLinear()
+        .domain([first,last])
+        .range(d3.quantize(d3.interpolateHcl("#0d47cc","#be0000"), 3));
+
+    function returnColorBasedOnCode(code) {
+        let value = 0;
+        for (let i = 0; i < csvData_rates.length; ++i) {
+            if (code === csvData_rates[i].country_code_alpha2) {
+                value = csvData_rates[i].change_rate_male;
+                break;
+            }
+        }
+        return colorScale(value);
+    }
 
     function styles(features) {
         // console.log("HERER")
@@ -147,13 +173,23 @@ Promise.all([
         //     console.log(alpah2WeHave2.includes(features.properties.iso_a2_eh))
         // }
 
-
         // Try to filter out countires we do not have!
-        if (!alpah2WeHave2.includes(features.properties.iso_a2_eh)) return {
-            fillColor: "rgba(232,0,0,0)",
-            fillOpacity: "rgba(169,75,75,0)",
-            color: "rgba(169,75,75,0)",
-        };
+        if (!alpah2WeHave2.includes(features.properties.iso_a2_eh))
+        {
+            return {
+                fillColor: "rgba(232,0,0,0)",
+                fillOpacity: "rgba(169,75,75,0)",
+                color: "rgba(169,75,75,0)",
+            }
+        }
+        else {
+            return  {
+                // fillColor: "rgb(0,25,189)",
+                fillColor: `${returnColorBasedOnCode(features.properties.iso_a2_eh)}`,
+                fillOpacity: "0.3",
+                color: "rgba(193,134,254,0.5)",
+            };
+        }
     }
 
     let geoJsonMaker = L.geoJson(data, {style: styles});
