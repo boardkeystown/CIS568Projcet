@@ -26,7 +26,8 @@ function changeFunc() {
 
     relocate(selected);
 
-    addToBar(selected)
+    addToBar(selected);
+    addToBarH(selected);
 
 }
 
@@ -47,7 +48,7 @@ function relocate(code){
             if(code === element.CountryCode){
                    var latlng = L.latLng(element.Latitude, element.Longitude);
                     map.flyTo(latlng);
-                    
+
 
             }
         })
