@@ -250,7 +250,7 @@ function mkScatterH(countryAlpha2="",idName="") {
         //attach svg to id
         let sp_svg = d3.select(idName)
             .append("svg")
-            .attr("width",sp_width+sp_margin.left+sp_margin.right)
+            .attr("width",sp_width+(2*sp_margin.left)+sp_margin.right)
             .attr("height",sp_height+sp_margin.top+sp_margin.bottom)
         //background of graph
         sp_svg.append("rect")
@@ -364,7 +364,7 @@ function mkScatterH(countryAlpha2="",idName="") {
 
         sp_svg.append("text")
             .attr("transform","rotate(-90)")
-            .attr("y",sp_width+20)
+            .attr("y",sp_width+(2*sp_margin.left)-30)
             .attr("x",0-(sp_height/2))
             .attr("dy","1em")
             .style("text-anchor","middle")
