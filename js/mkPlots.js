@@ -1,17 +1,20 @@
-//Make Scatter Plot
 
-//Scatter plot dimensions
-const sp_margin = {top:40, right: 5, bottom: 30, left: 65};
-const sp_width = 700 - sp_margin.left - sp_margin.right;
-const sp_height = 430 - sp_margin.top - sp_margin.bottom;
-const sp_data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
-const sp_colorBG = "#ffffff";
-const sp_colorGDP = "#85bb65";
-const sp_colorMale = "#347DC1";
-const sp_colorFemale = "#CC6594";
-
-function mkScatter(countryAlpha2="",idName="") {
+//The scatter plot with rate of change
+function mkPlots(countryAlpha2="", idName="") {
+    //Guard
     if (countryAlpha2==="" || idName == "") return;
+
+    //Scatter plot dimensions
+    const sp_margin = {top:40, right: 5, bottom: 30, left: 65};
+    const sp_width = 700 - sp_margin.left - sp_margin.right;
+    const sp_height = 430 - sp_margin.top - sp_margin.bottom;
+    const sp_data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
+    const sp_colorBG = "#ffffff";
+    const sp_colorGDP = "#85bb65";
+    const sp_colorMale = "#347DC1";
+    const sp_colorFemale = "#CC6594";
+
+    //Load the data
     Promise.all(
         [
             d3.csv(sp_data_source,d=>(
@@ -34,7 +37,6 @@ function mkScatter(countryAlpha2="",idName="") {
         let theData = data[0];
 
         //Filter the DATA by country code
-
         theData = theData.filter(d=> {
             if (d.country_code_alpha2 === countryAlpha2) {
                 return d;
@@ -51,7 +53,6 @@ function mkScatter(countryAlpha2="",idName="") {
             .attr("width", "100%")
             .attr("height", "100%")
             .attr("fill",`${sp_colorBG}`);
-
 
         let xAxis = mkYearAxis(theData);
 
@@ -106,7 +107,6 @@ function mkScatter(countryAlpha2="",idName="") {
         //Legend and labels
 
         //Legend
-
         let legend = sp_svg.append('g')
             .attr("transform","translate(0,50)")
             .selectAll()
@@ -167,71 +167,56 @@ function mkScatter(countryAlpha2="",idName="") {
             .text("GDP (rate of change)")
 
     });
-}
 
-function mkYearAxis(data) {
-    let years_extent = d3.extent(data,d=> {
-        return d.year
-    });
-    let axisScale = d3.scaleLinear()
-        .domain(years_extent)
-        .range([sp_margin.left,sp_width]);
-    return axisScale;
-}
-
-function mkMFAxis(data) {
-    let mf_change_rate = []
-    for (let i = 0; i < data.length; ++i) {
-        mf_change_rate.push(data[i].male_height_change_rate);
-        mf_change_rate.push(data[i].female_height_change_rate);
+    function mkYearAxis(data) {
+        let years_extent = d3.extent(data,d=> {
+            return d.year
+        });
+        let axisScale = d3.scaleLinear()
+            .domain(years_extent)
+            .range([sp_margin.left,sp_width]);
+        return axisScale;
     }
-    let joint_extent = d3.extent(mf_change_rate);
-    let axisScale = d3.scaleLinear()
-        .domain(joint_extent)
-        .range([sp_height,sp_margin.top]);
-    return axisScale;
+
+    function mkMFAxis(data) {
+        let mf_change_rate = []
+        for (let i = 0; i < data.length; ++i) {
+            mf_change_rate.push(data[i].male_height_change_rate);
+            mf_change_rate.push(data[i].female_height_change_rate);
+        }
+        let joint_extent = d3.extent(mf_change_rate);
+        let axisScale = d3.scaleLinear()
+            .domain(joint_extent)
+            .range([sp_height,sp_margin.top]);
+        return axisScale;
+    }
+
+
+    function mkGPDAxis(data) {
+        let gdp_change_rate = d3.extent(data,d=>{
+            return d.GDP_change_rate;
+        });
+        let axisScale = d3.scaleLinear()
+            .domain(gdp_change_rate)
+            .range([sp_height,sp_margin.top]);
+        return axisScale;
+    }
 }
 
-
-function mkGPDAxis(data) {
-    let gdp_change_rate = d3.extent(data,d=>{
-        return d.GDP_change_rate;
-    });
-    let axisScale = d3.scaleLinear()
-        .domain(gdp_change_rate)
-        .range([sp_height,sp_margin.top]);
-    return axisScale;
-}
-
-function mkLegend() {
-    legend.append("rect")
-        .attr('width',"90px")
-        .attr('height',"25px")
-        .attr("transform","translate(-5, -15)")
-        .attr('fill',"black")
-
-    legend.append("rect")
-        .attr('width',"90px")
-        .attr('height',"25px")
-        .attr("transform","translate(-5, -15)")
-        .attr('fill',"white")
-
-    legend.append("circle")
-        .attr('width',"10px")
-        .attr('height',"2px")
-        .attr("transform","translate(-5, -12)")
-        .attr('cx',"10px")
-        .attr('cy',"10px")
-        .attr('r',"8px")
-
-    legend.append("text")
-        .text(d=>d.name)
-        .attr("dx","20px")
-        .attr("dy","5px")
-}
-
+//The scatter plot with height cm and gdp
 function mkScatterH(countryAlpha2="",idName="") {
+    //guard
     if (countryAlpha2==="" || idName == "") return;
+
+    //Scatter plot dimensions
+    const sp_margin = {top:40, right: 5, bottom: 30, left: 65};
+    const sp_width = 700 - sp_margin.left - sp_margin.right;
+    const sp_height = 430 - sp_margin.top - sp_margin.bottom;
+    const sp_data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
+    const sp_colorBG = "#ffffff";
+    const sp_colorGDP = "#85bb65";
+    const sp_colorMale = "#347DC1";
+    const sp_colorFemale = "#CC6594";
 
     Promise.all(
         [
@@ -323,11 +308,9 @@ function mkScatterH(countryAlpha2="",idName="") {
             .attr("cx", function (d) { return xAxis(d.year); } )
             .attr("r", 3.5)
             .style("fill", sp_colorFemale)
-
         //Legend and labels
 
         //Legend
-
         let legend = sp_svg.append('g')
             .attr("transform","translate(0,50)")
             .selectAll()
@@ -388,65 +371,38 @@ function mkScatterH(countryAlpha2="",idName="") {
             .text("GDP (in USD)")
 
     });
-}
 
-function mkYearAxisH(data) {
-    let years_extent = d3.extent(data,d=> {
-        return d.year
-    });
-    let axisScale = d3.scaleLinear()
-        .domain(years_extent)
-        .range([sp_margin.left,sp_width]);
-    return axisScale;
-}
-
-function mkMFAxisH(data) {
-    let mf_change_rate = []
-    for (let i = 0; i < data.length; ++i) {
-        mf_change_rate.push(data[i].male_height_cm);
-        mf_change_rate.push(data[i].female_height_cm);
+    function mkYearAxisH(data) {
+        let years_extent = d3.extent(data,d=> {
+            return d.year
+        });
+        let axisScale = d3.scaleLinear()
+            .domain(years_extent)
+            .range([sp_margin.left,sp_width]);
+        return axisScale;
     }
-    let joint_extent = d3.extent(mf_change_rate);
-    let axisScale = d3.scaleLinear()
-        .domain(joint_extent)
-        .range([sp_height,sp_margin.top]);
-    return axisScale;
-}
+
+    function mkMFAxisH(data) {
+        let mf_change_rate = []
+        for (let i = 0; i < data.length; ++i) {
+            mf_change_rate.push(data[i].male_height_cm);
+            mf_change_rate.push(data[i].female_height_cm);
+        }
+        let joint_extent = d3.extent(mf_change_rate);
+        let axisScale = d3.scaleLinear()
+            .domain(joint_extent)
+            .range([sp_height,sp_margin.top]);
+        return axisScale;
+    }
 
 
-function mkGPDAxisH(data) {
-    let gdp_change_rate = d3.extent(data,d=>{
-        return d.GDP_change_USD;
-    });
-    let axisScale = d3.scaleLinear()
-        .domain(gdp_change_rate)
-        .range([sp_height,sp_margin.top]);
-    return axisScale;
-}
-
-function mkLegend() {
-    legend.append("rect")
-        .attr('width',"90px")
-        .attr('height',"25px")
-        .attr("transform","translate(-5, -15)")
-        .attr('fill',"black")
-
-    legend.append("rect")
-        .attr('width',"90px")
-        .attr('height',"25px")
-        .attr("transform","translate(-5, -15)")
-        .attr('fill',"white")
-
-    legend.append("circle")
-        .attr('width',"10px")
-        .attr('height',"2px")
-        .attr("transform","translate(-5, -12)")
-        .attr('cx',"10px")
-        .attr('cy',"10px")
-        .attr('r',"8px")
-
-    legend.append("text")
-        .text(d=>d.name)
-        .attr("dx","20px")
-        .attr("dy","5px")
+    function mkGPDAxisH(data) {
+        let gdp_change_rate = d3.extent(data,d=>{
+            return d.GDP_change_USD;
+        });
+        let axisScale = d3.scaleLinear()
+            .domain(gdp_change_rate)
+            .range([sp_height,sp_margin.top]);
+        return axisScale;
+    }
 }

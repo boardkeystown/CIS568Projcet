@@ -15,7 +15,6 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_L
     attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
 }).addTo(map);
 
-
 //L.Control.geocoder().addTo(map);
 // https://gis.stackexchange.com/questions/179630/setting-bounds-and-making-map-bounce-back-if-moved-away
 
@@ -57,7 +56,7 @@ var male = L.icon({
 Promise.all([
     //d3.csv(coords),
     d3.json(geo_json),
-    d3.csv(sp_data_source, d => (
+    d3.csv(data_source, d => (
         {
             country: d['Entity'],
             country_code_alpha3: d['Code'],

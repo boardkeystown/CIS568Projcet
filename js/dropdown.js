@@ -55,14 +55,13 @@ function changeFunc() {
 
     relocate(selected);
 
-    addToBar(selected);
-    addToBarH(selected);
+    addToBarRateOfChange(selected);
+    addToBarHeightvsGDP(selected);
 
 }
 
 function zoom(){
     map.setZoom(3);
-
 }
 
 function relocate(code){
@@ -71,17 +70,13 @@ function relocate(code){
 
     ]).then(data => {
         //spacial horizon intercontinental translocator
-        // const shit = data[0]
-        console.log(shit);
+        const shit = data[0]
+        // console.log(shit);
         shit.forEach(element =>{
             if(code === element.CountryCode){
                    var latlng = L.latLng(element.Latitude, element.Longitude);
                     map.flyTo(latlng);
-
-
             }
         })
-
-
     })
 }

@@ -1,17 +1,5 @@
-//We want an item to appear on bar with name.
-//if active change bar icon to bright color.
-//sub window CLOSE[x] closes it "REMOVE FROM VIEW"
-//sub window Min[-] closes it display none.
-
-
-$("#add-button").click(function () {
-    addToBar("AU")
-});
-
-
-//Add window to dom
-function addToBar(countryAlpha2) {
-
+//Add the rate of change scatter plot to the bar
+function addToBarRateOfChange(countryAlpha2) {
     let $graphWindow = $(
         `
             <div class="float-window" id="${countryAlpha2}-scatter-drag">
@@ -19,7 +7,7 @@ function addToBar(countryAlpha2) {
             <div class="float-window-nav">
                 <!--Buttons-->
                 <div class="float-window-nav-title">
-                    ${countryAlpha2}-Scatter
+                    ${countryAlpha2} Rate Of Change
                 </div>
                 <div class="float-window-nav-btns">
                     <button id="${countryAlpha2}-scatter-min-btn" class="float-window-indv-buttons"> &nbsp;_&nbsp; </button>
@@ -36,7 +24,7 @@ function addToBar(countryAlpha2) {
     let $windowIcon = $(
         `
         <div class="context-bar-item" id="${countryAlpha2}-scatter-icon">
-            <button id="${countryAlpha2}-scatter-icon-btn" class="content-bar-item-button"> ${countryAlpha2}-scatter </button>
+            <button id="${countryAlpha2}-scatter-icon-btn" class="content-bar-item-button"> ${countryAlpha2} Rate Of Change </button>
         </div>
         `
     );
@@ -44,11 +32,7 @@ function addToBar(countryAlpha2) {
     $("#ui-context-bar").append($windowIcon)
     $("#fooelm").append($graphWindow);
 
-
-    mkScatter(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
-
-
-
+    mkPlots(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
 
     $( `#${countryAlpha2}-scatter-drag` ).draggable()
 
@@ -60,7 +44,6 @@ function addToBar(countryAlpha2) {
     $( `#${countryAlpha2}-scatter-close-btn` ).click(function () {
         $(`#${countryAlpha2}-scatter-icon`).remove();
         $(`#${countryAlpha2}-scatter-drag`).remove();
-
     });
 
     $(`#${countryAlpha2}-scatter-icon-btn`).click(function () {
@@ -72,13 +55,10 @@ function addToBar(countryAlpha2) {
             $(`#${countryAlpha2}-scatter-drag`).hide();
             return;;
         }
-
     });
-
 }
 
-function addToBarH(countryAlpha2) {
-
+function addToBarHeightvsGDP(countryAlpha2) {
     let $graphWindowH = $(
         `
             <div class="float-window" id="${countryAlpha2}-scatter-drag-h">
@@ -86,7 +66,7 @@ function addToBarH(countryAlpha2) {
             <div class="float-window-nav">
                 <!--Buttons-->
                 <div class="float-window-nav-title">
-                    ${countryAlpha2}-Scatter
+                    ${countryAlpha2} Height v.s. GDP
                 </div>
                 <div class="float-window-nav-btns">
                     <button id="${countryAlpha2}-scatter-min-btn-h" class="float-window-indv-buttons"> &nbsp;_&nbsp; </button>
@@ -103,7 +83,7 @@ function addToBarH(countryAlpha2) {
     let $windowIconH = $(
         `
         <div class="context-bar-item" id="${countryAlpha2}-scatter-icon-h">
-            <button id="${countryAlpha2}-scatter-icon-btn-h" class="content-bar-item-button"> ${countryAlpha2}-scatter </button>
+            <button id="${countryAlpha2}-scatter-icon-btn-h" class="content-bar-item-button"> ${countryAlpha2} Height v.s. GDP </button>
         </div>
         `
     );
@@ -111,11 +91,7 @@ function addToBarH(countryAlpha2) {
     $("#ui-context-bar").append($windowIconH)
     $("#fooelm").append($graphWindowH);
 
-
     mkScatterH(`${countryAlpha2}`,`#${countryAlpha2}-scatter-h`)
-
-
-
 
     $( `#${countryAlpha2}-scatter-drag-h` ).draggable()
 
@@ -139,9 +115,7 @@ function addToBarH(countryAlpha2) {
             $(`#${countryAlpha2}-scatter-drag-h`).hide();
             return;;
         }
-
     });
-
 }
 
 
