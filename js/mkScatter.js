@@ -203,8 +203,6 @@ function mkGPDAxis(data) {
     return axisScale;
 }
 
-
-
 function mkLegend() {
     legend.append("rect")
         .attr('width',"90px")
@@ -425,8 +423,6 @@ function mkGPDAxisH(data) {
         .range([sp_height,sp_margin.top]);
     return axisScale;
 }
-
-
 
 function mkLegend() {
     legend.append("rect")
