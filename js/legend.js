@@ -34,14 +34,12 @@ function mkLegend(idselector = "") {
 
         function mkColorListRec(l, f, d) {
             let list = [];
-            console.log(f)
             while (f > l) {
                 list.push(l)
                 l += d;
             }
             return list;
         }
-
         let colorList = mkColorListRec(first, last, 1)
 
         console.log(colorList)
@@ -55,7 +53,6 @@ function mkLegend(idselector = "") {
             .enter()
             .append('g')
             .attr('class', 'legend');
-
 
         legend.append('rect')
             .attr('x', width)

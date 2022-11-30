@@ -42,6 +42,8 @@ var male = L.icon({
 // map.getPanes().D3GEOJSON = 'mapPath';
 
 
+
+
 // var svg = d3.select(map.getPanes().markerPane)
 // var svg = d3.select(map.getPanes().tilePane)
 // var svg = d3.select(map.getPanes().svgOverlay)
@@ -196,6 +198,43 @@ Promise.all([
 
 
     // L.geoJson(data).addTo(map);
+
+
+
+    //scale
+    L.control.scale().addTo(map);
+
+    //legend
+    let legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+        function mkColorListRec(l, f, d) {
+            let list = [];
+            while (f > l) {
+                list.push(l)
+                l += d;
+            }
+            return list;
+        }
+        let div = L.DomUtil.create('div', 'info legend');
+        let colorList = mkColorListRec(first, last, 1);
+        let labels = [];
+        // loop through our density intervals and generate a label with a colored square for each interval
+        div.innerHTML = "<b>(-)Rate Of Change</b<br>";
+        for (let i = 0; i < colorList.length; i++) {
+            if (i < colorList.length-2) {
+                div.innerHTML += `<i style="background: ${colorScale(colorList[i])}"></i> <br>`;
+            } else {
+                div.innerHTML += `<i style="background: ${colorScale(colorList[i])}"></i>`;
+            }
+        }
+        div.innerHTML +="<b>(+)Rate Of Change</b>";
+        return div;
+    };
+
+    legend.addTo(map);
+
+
+
 
 })
 
