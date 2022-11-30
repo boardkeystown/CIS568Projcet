@@ -151,7 +151,7 @@ Promise.all([
 
     let colorScale = d3.scaleLinear()
         .domain([first,last])
-        .range(d3.quantize(d3.interpolateHcl("#00ff15","#be0000"), 2));
+        .range(d3.quantize(d3.interpolateHcl("#be0000", "#00ff15"), 2));
 
     function returnColorBasedOnCode(code) {
         let value = 0;
