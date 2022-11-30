@@ -56,7 +56,16 @@
                 dropdown();
             </script>
             <div class="dropdown">
-                <button class="dropdown dropdown-btn"> GO!!!</button>
+                <button id="go-btn" class="dropdown dropdown-btn"> GO!!!</button>
+                <script>
+                    const gotBtn = document.getElementById("go-btn").onclick = function () {
+                        const synth = window.speechSynthesis
+                        let ourText = "Lets goooooooooooo!!!!"
+                        synth.pitch = 1.5
+                        const utterThis = new SpeechSynthesisUtterance(ourText)
+                        synth.speak(utterThis)
+                    }
+                </script>
             </div>
         </div>
         <div id="map-content">
