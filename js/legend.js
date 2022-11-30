@@ -1,11 +1,9 @@
 
-function mkLegend() {
-    // mkPlots("AU","#scatter")
+function mkLegend(idselector = "") {
+    if (idselector === "") return;
+
     let _data_source_rate_change_per_country = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_rate_change_per_country_gdp.csv";
     //SCALE TEST
-    let svg = d3.create("svg")
-        .attr("height", 150)
-
     Promise.all([
         d3.csv(_data_source_rate_change_per_country, d => (
             {
@@ -20,9 +18,10 @@ function mkLegend() {
 
         let csvData_rates = data[0]
 
-        console.log(csvData_rates)
-
-
+        // console.log(csvData_rates)
+        let svg =  d3.selectAll(idselector)
+            .append("svg")
+            .attr("height", 150);
 
         let width = 200
 
@@ -57,6 +56,7 @@ function mkLegend() {
             .append('g')
             .attr('class', 'legend');
 
+
         legend.append('rect')
             .attr('x', width)
             .attr('y', function (d, i) {
@@ -89,5 +89,4 @@ function mkLegend() {
 
 
     })
-    return svg;
 }
