@@ -31,7 +31,7 @@
     <script src="./lib/jquery-3.6.0.js"></script>
     <script src="./lib/jquery-ui.js"></script>
 
-    <!--Showdown-->
+    <!--Showdown for markdown-->
     <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
 
     <!--  Our JS  -->
@@ -39,6 +39,7 @@
     <script src="./js/mapcontent.js" defer></script>
     <script src="js/mkPlots.js"></script>
     <script src="./js/windowManager.js" defer></script>
+    <script src="./js/hamburgerMenu.js"></script>
 
 </head>
 <body>
@@ -63,29 +64,6 @@
             <div class="extra-menu-container">
                 <div id="extra-menu-context"></div>
             </div>
-            <script>
-                //Hamburger toggle
-                $(function () {
-                    let drop_btn = $("#title-drop-btn");
-                    drop_btn.on("click", d => {
-                        // $("#title-drop-btn").children().toggleClass("change-drop");
-                        $("#title-drop-btn").toggleClass("change-drop");
-
-                        $("#extra-menu-context").toggle()
-                    });
-                });
-                //extra context
-                fetch('./assets/context.md')
-                    .then(response => response.text())
-                    .then((data) => {
-                        const converter = new showdown.Converter();
-                        // console.log(converter.getOptions())
-                        converter.setOption('tables', 'true');
-                        const html = converter.makeHtml(data);
-                        const content = document.getElementById("extra-menu-context")
-                        content.innerHTML = html;
-                    })
-            </script>
         </div>
         <div class="map-tool-buttons">
             <select class="dropdown" , id="menu" , onchange="changeFunc()">
