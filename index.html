@@ -79,7 +79,7 @@
                     .then(response => response.text())
                     .then((data) => {
                         const converter = new showdown.Converter();
-                        console.log(converter.getOptions())
+                        // console.log(converter.getOptions())
                         converter.setOption('tables', 'true');
                         const html = converter.makeHtml(data);
                         const content = document.getElementById("extra-menu-context")
