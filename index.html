@@ -2,27 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CIS Project</title>
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <title>Global View of GDP and Human Height</title>
     <link rel="shortcut icon" type="image/x-icon" href="./assets/favcon.png"/>
-
     <!--  custom CSS  -->
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/index.css">
-
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
           integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
           crossorigin=""/>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
-            integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
-            crossorigin=""></script>
+            integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Esri Leaflet Geocoder -->
-    <link
-            rel="stylesheet"
-            href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"/>
     <!-- Load Esri Leaflet from CDN -->
     <script src="https://unpkg.com/esri-leaflet"></script>
     <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
@@ -31,11 +26,13 @@
     <script src="./lib/d3.js"></script>
     <script src="./lib/topojson.v1.min.js"></script>
 
-
     <!--  Jquery -->
     <link rel="stylesheet" href="./lib/jquery-ui.css">
     <script src="./lib/jquery-3.6.0.js"></script>
     <script src="./lib/jquery-ui.js"></script>
+
+    <!--Showdown-->
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
 
     <!--  Our JS  -->
     <script src="./js/dropdown.js"></script>
@@ -45,9 +42,51 @@
 
 </head>
 <body>
-
 <div class="main-container">
     <div id="fooelm">
+        <div class="title-container">
+            <div class="site-title-container">
+                <div class="site-title">
+                    <!--Title Text-->
+                    <div class="site-title-text">
+                        GDP & Human Height Explorer
+                    </div>
+                    <!--Hamburger fake btn toggle-->
+                    <div class="title-content-drop-container" id="title-drop-btn">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </div>
+            </div>
+            <!--The extra context read from context markdown-->
+            <div class="extra-menu-container">
+                <div id="extra-menu-context"></div>
+            </div>
+            <script>
+                //Hamburger toggle
+                $(function () {
+                    let drop_btn = $("#title-drop-btn");
+                    drop_btn.on("click", d => {
+                        // $("#title-drop-btn").children().toggleClass("change-drop");
+                        $("#title-drop-btn").toggleClass("change-drop");
+
+                        $("#extra-menu-context").toggle()
+                    });
+                });
+                //extra context
+                fetch('./assets/context.md')
+                    .then(response => response.text())
+                    .then((data) => {
+                        const converter = new showdown.Converter();
+                        console.log(converter.getOptions())
+                        converter.setOption('tables', 'true');
+                        const html = converter.makeHtml(data);
+                        const content = document.getElementById("extra-menu-context")
+                        content.innerHTML = html;
+                    })
+            </script>
+        </div>
         <div class="map-tool-buttons">
             <select class="dropdown" , id="menu" , onchange="changeFunc()">
                 <option>Choose a Country</option>
@@ -71,12 +110,9 @@
         <div id="map-content">
             <div id="map"></div>
         </div>
-
         <div class="context-bar" id="ui-context-bar">
-
         </div>
     </div>
 </div>
-
 </body>
 </html>

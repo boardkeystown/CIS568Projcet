@@ -33,6 +33,99 @@
     width: 3cm;
 }
 
+.title-container {
+    border-bottom: #c387ff 3px solid;
+    width: 100%;
+}
+
+.site-title-container {
+    width: 100%;
+}
+
+.site-title {
+    background-color: #624cab;
+    width: 100%;
+}
+
+.site-title-text {
+    display: inline-block;
+    padding: 0.3rem;
+    font-size: xx-large;
+    color: #c186fe;
+    text-shadow: #605757 -1px 1px 1px,
+    #191237 -2px 2px 2px,
+    #050000 -3px 3px 3px;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #bf85fc;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change-drop .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change-drop .bar2 {
+    opacity: 0;
+}
+
+.change-drop .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+}
+
+.title-content-drop-container {
+    display: inline-block;
+    position: relative;
+    top: 10px;
+    bottom: 0px;
+    cursor: pointer;
+}
+
+.title-content-drop-container:hover * {
+    background-color: white;
+}
+
+.extra-menu-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#extra-menu-context {
+    border-top: #c387ff 3px solid;
+    background: #191237;
+    color: white;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /*Leave it display NONE by default!*/
+    display: none;
+}
+
+#extra-menu-context h1, h2, h3, h4, h5, h6 {
+    font-weight: bolder;
+    color: whitesmoke;
+    border-bottom: #c387ff 1px solid;
+}
+
+#extra-menu-context p {
+    font-size: large;
+    color: whitesmoke;
+}
+
+#extra-menu-context a {
+    text-decoration: none;
+    font-style: italic;
+    color: white;
+}
+
+#extra-menu-context a:hover {
+    text-decoration: none;
+    color: #c387ff;
+}
+
 /*GEOJSON OVERLAY*/
 .mapPath {
     fill: #000;
@@ -48,7 +141,6 @@
     flex-direction: column;
     justify-content: center;
     justify-items: center;
-
 }
 
 #map {
@@ -59,7 +151,7 @@
     /*https://calculateaspectratio.com/*/
     /*4:3*/
     width: 100%;
-    height: 90vh;
+    height: 85vh;
 }
 
 /*Turn off cringe leaflet banner*/
@@ -77,6 +169,7 @@ div.leaflet-control-attribution.leaflet-control {
     background-color: rgba(255, 255, 255, 0.75);
     padding: 0.5rem;
 }
+
 .legend i {
     width: 18px;
     height: 18px;
@@ -112,7 +205,6 @@ div.leaflet-control-attribution.leaflet-control {
     color: white;
     border: 0px solid;
     line-height: 2rem;
-    ;
 }
 
 
@@ -157,7 +249,8 @@ div.leaflet-control-attribution.leaflet-control {
     display: flex;
     float: right;
 }
-.float-window-indv-buttons{
+
+.float-window-indv-buttons {
     border: #c387ff 2px solid;
     border-radius: 5px;
 }
