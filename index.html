@@ -39,7 +39,7 @@
     <script src="./js/mapcontent.js" defer></script>
     <script src="js/mkPlots.js"></script>
     <script src="./js/windowManager.js" defer></script>
-    <script src="./js/hamburgerMenu.js"></script>
+    <script src="./js/hamburgerMenu.js" defer></script>
 
 </head>
 <body>
@@ -66,6 +66,17 @@
             </div>
         </div>
         <div class="map-tool-buttons">
+            <fieldset id="radio-list">
+                <label class="radio-list-label">Map Coloring Height Change</label>
+                <div id="radio-list-inputs">
+                    <input type="radio" id="male" name="color" value="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="female" name="color" value="female">
+                    <label for="female">Female</label><br>
+                    <input type="radio" id="avg" name="color" value="avg">
+                    <label for="avg">Average</label>
+                </div>
+            </fieldset>
             <select class="dropdown" , id="menu" , onchange="changeFunc()">
                 <option>Choose a Country</option>
             </select>

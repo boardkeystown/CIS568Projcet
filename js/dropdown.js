@@ -1,9 +1,8 @@
-
+const coords = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/average-latitude-longitude-countries.csv";
 
 //button population function
 function dropdown() {
     let _data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
-
     //load wikipedia iso csv
     Promise.all([
                         d3.csv('https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/wikipedia-iso-country-codes.csv'),

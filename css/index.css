@@ -9,35 +9,11 @@
     border-radius: 4px;
 }
 
-.map-tool-buttons {
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    flex-direction: row;
-    background: #191236;
-    border: #624cab 1px solid;
-    gap: 1rem;
-}
-
-.dropdown {
-    background-color: #634dab;
-    color: white;
-    font-size: 1rem;
-    line-height: 2rem;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.dropdown-btn {
-    width: 3cm;
-}
-
+/*Title Stuff*/
 .title-container {
     border-bottom: #c387ff 3px solid;
     width: 100%;
 }
-
 .site-title-container {
     width: 100%;
 }
@@ -124,6 +100,54 @@
 #extra-menu-context a:hover {
     text-decoration: none;
     color: #c387ff;
+}
+
+
+.map-tool-buttons {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: row;
+    background: #191236;
+    border: #624cab 1px solid;
+    gap: 1rem;
+}
+
+.dropdown {
+    background-color: #634dab;
+    color: white;
+    font-size: 1rem;
+    line-height: 2rem;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.dropdown-btn {
+    width: 3cm;
+}
+
+/*Map coloring*/
+#radio-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #624cab;
+    border-style: none;
+}
+
+#radio-list-inputs {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 1px;
+    bottom: 0px;
+
+}
+#radio-list-inputs input[type="radio"] {
+    accent-color: #c387ff;
 }
 
 /*GEOJSON OVERLAY*/
@@ -261,5 +285,6 @@ div.leaflet-control-attribution.leaflet-control {
     /*overflow: auto;*/
     /*resize: both;*/
 }
+
 
 
