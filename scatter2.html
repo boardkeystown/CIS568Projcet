@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://unpkg.com/d3-regression@1.3.10/dist/d3-regression.min.js"></script>
     <script src="..\..\lib\d3.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="..\..\js\legend.js"></script>
     <script src="..\..\js\mkPlots.js"></script>
+
 
     <style>
         :root {
@@ -20,9 +22,10 @@
 <body>
     <div id="thing">
     <script >
-        // let thing = mkLegend("#thing")
 
-        mkScattery("CL","#thing")
+        // mkScattery("CL","#thing")
+        // mkLineGraph("CL","#thing")
+        mkRegression("US","#thing")
 
 
     </script>
