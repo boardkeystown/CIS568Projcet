@@ -51,10 +51,10 @@ function dropdown() {
 function changeFunc() {
     var selectBox = document.getElementById("menu")
     var selected = selectBox.options[selectBox.selectedIndex].value;
-
+    var countryName = selectBox.options[selectBox.selectedIndex].textContent;
     relocate(selected);
 
-    addToBarRateOfChange(selected);
+    addToBarRateOfChange(selected, countryName);
     //addToBarHeightvsGDP(selected);
 
 }

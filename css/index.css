@@ -266,7 +266,9 @@ div.leaflet-control-attribution.leaflet-control {
     /*justify-content: center;*/
     display: inline-block;
     width: 100%;
+    font-size: 36px;
     text-align: center;
+    padding-left: 30px;
     color: #c387ff;
     background: #191236;
 

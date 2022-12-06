@@ -1,5 +1,5 @@
 //Add the rate of change scatter plot to the bar
-function addToBarRateOfChange(countryAlpha2) {
+function addToBarRateOfChange(countryAlpha2, countryName) {
     let $graphWindow = $(
         `
         
@@ -8,7 +8,7 @@ function addToBarRateOfChange(countryAlpha2) {
             <div class="float-window-nav">
                 <!--Buttons-->
                 <div class="float-window-nav-title">
-                    ${countryAlpha2} Rate Of Change
+                    ${countryName}
                 </div>
                 
                 
@@ -19,7 +19,8 @@ function addToBarRateOfChange(countryAlpha2) {
             </div>
             <div></div>
             <select class="dropdown" , id="${countryAlpha2}-GraphMenu">
-                    <option value =1>Scatter Plot</optionvalue>
+                    <option value =1>Rate of Change Scatter</optionvalue>
+                    <option value=4>Height vs GDP in USD/CM</option>
                     <option value=2>Line Graph</option>
                     <option value=3>Linear Regression</optionvalue>
             </select>
@@ -84,6 +85,10 @@ function addToBarRateOfChange(countryAlpha2) {
             case "3":
                 currentSVG.remove();
                 mkRegression(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+                break;
+            case "4":
+                currentSVG.remove();
+                mkScatterH(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
                 break;
             default:
                 //this case should never happen or i will peepee fart

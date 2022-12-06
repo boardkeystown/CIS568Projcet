@@ -9,10 +9,10 @@ This tool enables you learn what questions need to be asked as to the the "why" 
 ### Data & Sources:
 * GDP
     * Gross Domestic Product (GDP) is a measure of the market value of all final goods and services in a country.GDP here is measured in USD.
-    * <a href="#" target="_blank"> 🔗 Original Source </a>
+    * <a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?end=2021&start=2021&view=map&year=2021" target="_blank"> 🔗 Original Source </a>
 * Human Height
     * Human height measured in centimeters (CM). There is data for both male and female adults.
-    * <a href="#" target="_blank"> 🔗 Original Source </a>
+    * <a href="https://ourworldindata.org/search?q=human+height" target="_blank"> 🔗 Original Source </a>
 * Data used in this visitation has been combined into and filtered by dates to show available information.
     * <a href="#" target="_blank"> 🔗 Source </a>
 * Feel free to see source for visualization.S
