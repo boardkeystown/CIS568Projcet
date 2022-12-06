@@ -27,6 +27,7 @@
     display: inline-block;
     padding: 0.3rem;
     font-size: xx-large;
+    justify-content: right;
     color: #c186fe;
     text-shadow: #605757 -1px 1px 1px,
     #191237 -2px 2px 2px,
@@ -55,9 +56,11 @@
 
 .title-content-drop-container {
     display: inline-block;
+    float: right;
     position: relative;
-    top: 10px;
-    bottom: 0px;
+    top: 5px;
+    bottom: 10px;
+    right: 10px;
     cursor: pointer;
 }
 

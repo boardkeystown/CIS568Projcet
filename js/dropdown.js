@@ -55,7 +55,7 @@ function changeFunc() {
     relocate(selected);
 
     addToBarRateOfChange(selected);
-    addToBarHeightvsGDP(selected);
+    //addToBarHeightvsGDP(selected);
 
 }
 

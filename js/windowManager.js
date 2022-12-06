@@ -2,6 +2,7 @@
 function addToBarRateOfChange(countryAlpha2) {
     let $graphWindow = $(
         `
+        
             <div class="float-window" id="${countryAlpha2}-scatter-drag">
             <!--NAV BAR-->
             <div class="float-window-nav">
@@ -9,11 +10,19 @@ function addToBarRateOfChange(countryAlpha2) {
                 <div class="float-window-nav-title">
                     ${countryAlpha2} Rate Of Change
                 </div>
+                
+                
                 <div class="float-window-nav-btns">
                     <button id="${countryAlpha2}-scatter-min-btn" class="float-window-indv-buttons"> &nbsp;_&nbsp; </button>
                     <button id="${countryAlpha2}-scatter-close-btn" class="float-window-indv-buttons"> &nbsp;X&nbsp; </button>
                 </div>
             </div>
+            <div></div>
+            <select class="dropdown" , id="${countryAlpha2}-GraphMenu">
+                    <option value =1>Scatter Plot</optionvalue>
+                    <option value=2>Line Graph</option>
+                    <option value=3>Linear Regression</optionvalue>
+            </select>
             <div class="float-window-content" id="${countryAlpha2}-scatter">
                 <!--SVG GOES HERE-->
             </div>
@@ -56,8 +65,33 @@ function addToBarRateOfChange(countryAlpha2) {
             return;;
         }
     });
-}
+    //For dropdown menu
+    $ (`#${countryAlpha2}-GraphMenu`).change(function(elm){
+        //gets current svg for removal
+        let currentSVG = $(`#${countryAlpha2}-scatter`).children("svg");
 
+
+        //switch statement to decide if the window will change
+        switch(elm.target.value){
+            case "1":
+                currentSVG.remove();
+                mkPlots(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+                break;
+            case "2":
+                currentSVG.remove();
+                mkLineGraph(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+                break;
+            case "3":
+                currentSVG.remove();
+                mkRegression(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+                break;
+            default:
+                //this case should never happen or i will peepee fart
+                break;
+        }
+    });
+}
+/*
 function addToBarHeightvsGDP(countryAlpha2) {
     let $graphWindowH = $(
         `
@@ -117,7 +151,7 @@ function addToBarHeightvsGDP(countryAlpha2) {
         }
     });
 }
-
+*/
 
 
 

@@ -468,19 +468,19 @@ function mkLineGraph(countryAlpha2="",idName="") {
         // Add X Axis
         sp_svg.append("g")
             .attr("transform",`translate(0,${sp_height})`)
-            .call(d3.axisBottom(xAxis).ticks(30).tickFormat(d3.timeFormat("%Y")));
+            .call(d3.axisBottom(xAxis).ticks(15).tickFormat(d3.timeFormat("%Y")));
 
         //Add Y Axis
         let yAxisRate_change = mkMFAxisH(theData);
 
         sp_svg.append("g")
             .attr("transform",`translate(${sp_margin.left},0)`)
-            .call(d3.axisLeft(yAxisRate_change).ticks(25));
+            .call(d3.axisLeft(yAxisRate_change).ticks(15));
 
         let yAxisGDPRate_change = mkGPDAxisH(theData);
         sp_svg.append("g")
             .attr("transform",`translate(${sp_width},${0})`)
-            .call(d3.axisRight(yAxisGDPRate_change).ticks(15));
+            .call(d3.axisRight(yAxisGDPRate_change).ticks(15).tickFormat(d3.format(".2e")));
 
         //Line generators!
         let lineGen_gdp = d3.line()
