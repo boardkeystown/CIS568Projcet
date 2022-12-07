@@ -839,7 +839,7 @@ function mkRegression(countryAlpha2="",idName="") {
     if (countryAlpha2==="" || idName == "") return;
     //Scatter plot dimensions
     const sp_margin = {top:40, right: 5, bottom: 30, left: 65};
-    const sp_width = 800 - sp_margin.left - sp_margin.right;
+    const sp_width = 700 - sp_margin.left - sp_margin.right;
     const sp_height = 430 - sp_margin.top - sp_margin.bottom;
     const sp_data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
     const sp_colorBG = "#ffffff";
@@ -958,7 +958,7 @@ function mkRegression(countryAlpha2="",idName="") {
             .attr("transform","translate(0,50)")
             .selectAll()
             .data([
-                    {name:"Avg"},
+                    {name:"Avg Height (M & F)"},
                     {name:"Regression Line"},
                     //{name:"Male"},
                     //{name:"Female"},
@@ -973,13 +973,27 @@ function mkRegression(countryAlpha2="",idName="") {
 
 
 
+        let xAdj = 0;
+        const textPadding = 90
         legend.append("text")
             .text(d=>d.name)
+            .attr("x",d=> {
+                let xtemp = xAdj;
+                xAdj = xAdj + textPadding;
+                return xtemp;
+            })
 
+        xAdj = 0;
+        const xTranslate=-20;
+        const YTranslate=-15;
         legend.append("circle")
             .attr('width',"10px")
             .attr('height',"2px")
-            .attr("transform","translate(-20, -15)")
+            .attr("transform",d=> {
+                let xtemp = xAdj;
+                xAdj = xAdj - 93;
+                return `translate(${xTranslate-xtemp}, ${YTranslate})`
+            })
             .attr('cx',"10px")
             .attr('cy',"10px")
             .attr('r',"5.5px")
@@ -989,7 +1003,7 @@ function mkRegression(countryAlpha2="",idName="") {
                     color=sp_colorMale;
                 } else if (d.name==="Female") {
                     color=sp_colorFemale;
-                } else if (d.name==="Avg") {
+                } else if (d.name==="Avg Height (M & F)") {
                     color=sp_colorAVG;
                 }
                 return color;
@@ -1033,15 +1047,29 @@ function mkRegression(countryAlpha2="",idName="") {
 
     function mkMFAxisH(data) {
         let mf_change_rate = []
+
+        // (d.male_height_cm + d.female_height_cm)/2)
+
+        //
+        // for (let i = 0; i < data.length; ++i) {
+        //     mf_change_rate.push(data[i].male_height_cm);
+        //     mf_change_rate.push(data[i].female_height_cm);
+        // }
+
+
         for (let i = 0; i < data.length; ++i) {
-            mf_change_rate.push(data[i].male_height_cm);
-            mf_change_rate.push(data[i].female_height_cm);
+            mf_change_rate.push((data[i].male_height_cm + data[i].female_height_cm)/2);
         }
+
         let joint_extent = d3.extent(mf_change_rate);
         let axisScale = d3.scaleLinear()
             .domain(joint_extent)
             .range([sp_height,sp_margin.top]);
+
         return axisScale;
+
+
+
     }
 
     function mkGPDAxisH(data) {

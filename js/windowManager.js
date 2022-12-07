@@ -19,10 +19,11 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
             </div>
             <div></div>
             <select class="dropdown" , id="${countryAlpha2}-GraphMenu">
-                    <option value=2>Line Graph</option>
-                    <option value =1>Rate of Change Scatter</optionvalue>
-                    <option value=4>Height vs GDP in USD/CM</option>
-                    <option value=3>Linear Regression</optionvalue>
+                    <option value=2>Height vs GDP in USD/CM (Line)</option>
+                    <option value=4>Height vs GDP in USD/CM (Scatter)</option>
+                    <option value=1>Hight over GDP</optionvalue>
+                    <option value=3>AVG Hight over GDP with trend</optionvalue>
+                    <option value=5>Height vs GDP Rate of Change</optionvalue>
             </select>
             <div class="float-window-content" id="${countryAlpha2}-scatter">
                 <!--SVG GOES HERE-->
@@ -89,6 +90,10 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
             case "4":
                 currentSVG.remove();
                 mkScatterH(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+                break;
+            case "5":
+                currentSVG.remove();
+                mkPlots(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
                 break;
             default:
                 //this case should never happen or i will peepee fart
