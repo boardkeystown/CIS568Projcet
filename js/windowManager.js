@@ -21,8 +21,8 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
             <select class="dropdown" , id="${countryAlpha2}-GraphMenu">
                     <option value=2>Height vs GDP in USD/CM (Line)</option>
                     <option value=4>Height vs GDP in USD/CM (Scatter)</option>
-                    <option value=1>Hight over GDP</optionvalue>
-                    <option value=3>AVG Hight over GDP with trend</optionvalue>
+                    <option value=1>Height over GDP</optionvalue>
+                    <option value=3>AVG Height over GDP with trend</optionvalue>
                     <option value=5>Height vs GDP Rate of Change</optionvalue>
             </select>
             <div class="float-window-content" id="${countryAlpha2}-scatter">
