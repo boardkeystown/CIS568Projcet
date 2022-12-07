@@ -13,8 +13,8 @@ This tool enables you learn what questions need to be asked as to the the "why" 
 * Human Height
     * Human height measured in centimeters (CM). There is data for both male and female adults.
     * <a href="https://ourworldindata.org/search?q=human+height" target="_blank"> 🔗 Original Source </a>
-* Data used in this visitation has been combined into and filtered by dates to show available information.
-    * <a href="#" target="_blank"> 🔗 Source </a>
+* Data used in this visualization has been combined into and filtered by dates to show available information.
+    * <a href="https://github.com/boardkeystown/CIS568Project/blob/main/data/avg_height_human_country_gdp.csv" target="_blank"> 🔗 Source </a>
 * Feel free to see source for visualization.S
     * <a href="https://github.com/boardkeystown/CIS568Project" target="_blank"> 🔗 Github Link Here </a>
 

@@ -19,9 +19,9 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
             </div>
             <div></div>
             <select class="dropdown" , id="${countryAlpha2}-GraphMenu">
+                    <option value=2>Line Graph</option>
                     <option value =1>Rate of Change Scatter</optionvalue>
                     <option value=4>Height vs GDP in USD/CM</option>
-                    <option value=2>Line Graph</option>
                     <option value=3>Linear Regression</optionvalue>
             </select>
             <div class="float-window-content" id="${countryAlpha2}-scatter">
@@ -34,7 +34,7 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
     let $windowIcon = $(
         `
         <div class="context-bar-item" id="${countryAlpha2}-scatter-icon">
-            <button id="${countryAlpha2}-scatter-icon-btn" class="content-bar-item-button"> ${countryAlpha2} Rate Of Change </button>
+            <button id="${countryAlpha2}-scatter-icon-btn" class="content-bar-item-button"> ${countryName} </button>
         </div>
         `
     );
@@ -42,7 +42,7 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
     $("#ui-context-bar").append($windowIcon)
     $("#fooelm").append($graphWindow);
 
-    mkPlots(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+    mkLineGraph(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
 
     $( `#${countryAlpha2}-scatter-drag` ).draggable()
 
@@ -76,7 +76,7 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
         switch(elm.target.value){
             case "1":
                 currentSVG.remove();
-                mkPlots(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
+                mkScattery(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
                 break;
             case "2":
                 currentSVG.remove();

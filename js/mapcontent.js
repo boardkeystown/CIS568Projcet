@@ -155,7 +155,21 @@ function mkChoropleth(changeRateAttr = "male", removeCurrent = false) {
             }
             return list;
         }
+        function mkColorListRecV2(l, f, d) {
+            let list = [];
+            let biggest = Math.abs(l) + f;
+            let step = biggest / d;
+            console.log(biggest);
+            console.log(step);
 
+            while (biggest > l) {
+                list.push(l)
+                l += step;
+            }
+            console.log(l);
+            console.log(list);
+            return list;
+        }
         let div = L.DomUtil.create('div', 'info legend');
         let colorList = mkColorListRec(first, last, 1);
         let labels = [];

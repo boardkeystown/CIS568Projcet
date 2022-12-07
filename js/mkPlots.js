@@ -690,7 +690,7 @@ function mkScattery(countryAlpha2="",idName="") {
         let yAxisGDPRate_change = mkGPDAxisH(theData);
         sp_svg.append("g")
             .attr("transform",`translate(0,${sp_height})`)
-            .call(d3.axisBottom(yAxisGDPRate_change));
+            .call(d3.axisBottom(yAxisGDPRate_change).ticks(10).tickFormat(d3.format(".2e")));
 
         //Add Y Axis
         let yAxisRate_change = mkMFAxisH(theData);
@@ -785,7 +785,13 @@ function mkScattery(countryAlpha2="",idName="") {
             .style("text-anchor","middle")
             .text("Male & Female Height (in cm)")
 
-
+        sp_svg.append("text")
+            .attr("transform","rotate(0)")
+            .attr("y",sp_height+15)
+            .attr("x",(sp_width/2))
+            .attr("dy","1em")
+            .style("text-anchor","middle")
+            .text("GDP in USD")
 
     });
 
@@ -887,7 +893,7 @@ function mkRegression(countryAlpha2="",idName="") {
         let yAxisGDPRate_change = mkGPDAxisH(theData);
         sp_svg.append("g")
             .attr("transform",`translate(0,${sp_height})`)
-            .call(d3.axisBottom(yAxisGDPRate_change));
+            .call(d3.axisBottom(yAxisGDPRate_change).ticks(10).tickFormat(d3.format(".2e")));
 
 
 
@@ -944,7 +950,7 @@ function mkRegression(countryAlpha2="",idName="") {
             .attr("d",d=>lineGen_height(d))
             .style("fill","none")
             .style("stroke",sp_colorGDP)
-            .style("stroke-width",'5px');
+            .style("stroke-width",'3px');
 
 
         //Legend
@@ -953,9 +959,9 @@ function mkRegression(countryAlpha2="",idName="") {
             .selectAll()
             .data([
                     {name:"Avg"},
-                    // {name:"GDP"},
-                    {name:"Male"},
-                    {name:"Female"},
+                    {name:"Regression Line"},
+                    //{name:"Male"},
+                    //{name:"Female"},
                 ]
             )
             .enter()
@@ -1005,7 +1011,13 @@ function mkRegression(countryAlpha2="",idName="") {
             .style("text-anchor","middle")
             .text("Male & Female Height (in cm)")
 
-
+        sp_svg.append("text")
+            .attr("transform","rotate(0)")
+            .attr("y",sp_height+15)
+            .attr("x",(sp_width/2))
+            .attr("dy","1em")
+            .style("text-anchor","middle")
+            .text("GDP in USD")
 
     });
 
