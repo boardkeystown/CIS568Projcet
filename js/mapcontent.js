@@ -171,7 +171,7 @@ function mkChoropleth(changeRateAttr = "male", removeCurrent = false) {
         }
 
         function mkToolTip(value) {
-            return `<span class="tooltiptext"> height change ≈ <br> ${value.toFixed(3)} (CM) </span>`;
+            return `<span class="tooltiptext"> height change ≈  <br> ${value.toFixed(3)} (CM) </span>`;
         }
 
         let div = L.DomUtil.create('div', 'info legend');

@@ -50,8 +50,10 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
     mkLineGraph(`${countryAlpha2}`,`#${countryAlpha2}-scatter`)
 
     //Add to stack for set of IDS that are draggable
+
     windowsStack.push( `#${countryAlpha2}-scatter-drag`)
-    stackUI = $(windowsStack.toLocaleString()).draggable({ stack: `div`});
+    stackUI = $(windowsStack.toLocaleString()).draggable({ stack: `.float-window`});
+
     // $( `#${countryAlpha2}-scatter-drag` ).draggable({ stack: `#${countryAlpha2}-scatter-drag` })
     // $( `#${countryAlpha2}-scatter-drag` ).draggable();
 
@@ -69,7 +71,7 @@ function addToBarRateOfChange(countryAlpha2, countryName) {
             return value != `#${countryAlpha2}-scatter-drag`;
         });
         if (windowsStack.length > 0) {
-            stackUI = $(windowsStack.toLocaleString()).draggable({ stack: `div` });
+            stackUI = $(windowsStack.toLocaleString()).draggable({ stack: `.float-window` });
         }
     });
 

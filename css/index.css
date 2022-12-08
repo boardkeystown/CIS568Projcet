@@ -232,7 +232,7 @@ div.leaflet-control-attribution.leaflet-control {
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
-    z-index: 1;
+    z-index: inherit;
     bottom: 150%;
     left: 50%;
     margin-left: -60px;
