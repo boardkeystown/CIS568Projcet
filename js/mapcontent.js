@@ -161,7 +161,6 @@ function mkChoropleth(changeRateAttr = "male", removeCurrent = false) {
             let step = biggest / d;
             console.log(biggest);
             console.log(step);
-
             while (biggest > l) {
                 list.push(l)
                 l += step;
@@ -170,17 +169,21 @@ function mkChoropleth(changeRateAttr = "male", removeCurrent = false) {
             console.log(list);
             return list;
         }
+
+        function mkToolTip(value) {
+            return `<span class="tooltiptext"> height change ≈ <br> ${value.toFixed(3)} (CM) </span>`;
+        }
+
         let div = L.DomUtil.create('div', 'info legend');
         let colorList = mkColorListRec(first, last, 1);
         let labels = [];
         // loop through our intervals and generate a label with a colored square for each interval
         div.innerHTML = "<b>( - )</b<br>";
-        div.innerHTML = "<b>( - )</b<br>";
         for (let i = 0; i < colorList.length; i++) {
             if (i < colorList.length - 2) {
-                div.innerHTML += `<i style="background: ${colorScale(colorList[i])}"></i> <br>`;
+                div.innerHTML += `<i class="tooltip" style="background: ${colorScale(colorList[i])}"> ${mkToolTip(colorList[i])} </i> <br>`;
             } else {
-                div.innerHTML += `<i style="background: ${colorScale(colorList[i])}"></i>`;
+                div.innerHTML += `<i class="tooltip" style="background: ${colorScale(colorList[i])}"> ${mkToolTip(colorList[i])} </i>`;
             }
         }
         div.innerHTML += "<b>( + )</b>";

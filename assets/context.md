@@ -19,8 +19,12 @@ This tool enables you learn what questions need to be asked as to the the "why" 
     * <a href="https://github.com/boardkeystown/CIS568Project" target="_blank"> 🔗 Github Link Here </a>
 
 # How to Use:
-* Use mouse to Pan and Zoom Map
+* Use mouse to click, pan, and around zoom map
+* Choose Map Coloring Height Change
+    * Shows whether height has decreased or increased from begging to end of available data.
+    * Hover color legend in lower right to see approximant height change.
 * Choose A Country of interest from drop down
     * This will open sub visualization windows
-* Drag, minimize, or close windows.
+    * Choose from available graphs in sub window
+    * Drag, minimize, or close windows.
 * The "Go!!!" button? 😁

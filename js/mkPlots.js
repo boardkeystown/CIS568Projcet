@@ -250,7 +250,7 @@ function mkScatterH(countryAlpha2="",idName="") {
         //attach svg to id
         let sp_svg = d3.select(idName)
             .append("svg")
-            .attr("width",sp_width+(2*sp_margin.left)+sp_margin.right)
+            .attr("width",sp_width+(20+sp_margin.left)+sp_margin.right)
             .attr("height",sp_height+sp_margin.top+sp_margin.bottom)
         //background of graph
         sp_svg.append("rect")
@@ -276,7 +276,7 @@ function mkScatterH(countryAlpha2="",idName="") {
         let yAxisGDPRate_change = mkGPDAxisH(theData);
         sp_svg.append("g")
             .attr("transform",`translate(${sp_width},${0})`)
-            .call(d3.axisRight(yAxisGDPRate_change));
+            .call(d3.axisRight(yAxisGDPRate_change).ticks(15).tickFormat(d3.format(".2e")));
 
         //Draw DOTS
         sp_svg.append('g')
@@ -364,7 +364,7 @@ function mkScatterH(countryAlpha2="",idName="") {
 
         sp_svg.append("text")
             .attr("transform","rotate(-90)")
-            .attr("y",sp_width+(2*sp_margin.left)-30)
+            .attr("y",sp_width+(sp_margin.left))
             .attr("x",0-(sp_height/2))
             .attr("dy","1em")
             .style("text-anchor","middle")
@@ -453,7 +453,7 @@ function mkLineGraph(countryAlpha2="",idName="") {
         //attach svg to id
         let sp_svg = d3.select(idName)
             .append("svg")
-            .attr("width",sp_width+(2*sp_margin.left)+sp_margin.right)
+            .attr("width",sp_width+(20+sp_margin.left)+sp_margin.right)
             .attr("height",sp_height+sp_margin.top+sp_margin.bottom)
 
         //background of graph
@@ -582,7 +582,7 @@ function mkLineGraph(countryAlpha2="",idName="") {
 
         sp_svg.append("text")
             .attr("transform","rotate(-90)")
-            .attr("y",sp_width+(2*sp_margin.left)-30)
+            .attr("y",sp_width+(sp_margin.left))
             .attr("x",0-(sp_height/2))
             .attr("dy","1em")
             .style("text-anchor","middle")
@@ -632,7 +632,7 @@ function mkScattery(countryAlpha2="",idName="") {
     if (countryAlpha2==="" || idName == "") return;
     //Scatter plot dimensions
     const sp_margin = {top:40, right: 5, bottom: 30, left: 65};
-    const sp_width = 800 - sp_margin.left - sp_margin.right;
+    const sp_width = 700 - sp_margin.left - sp_margin.right;
     const sp_height = 430 - sp_margin.top - sp_margin.bottom;
     const sp_data_source = "https://raw.githubusercontent.com/boardkeystown/CIS568Project/main/data/avg_height_human_country_gdp.csv";
     const sp_colorBG = "#ffffff";

@@ -78,7 +78,7 @@
                     <label for="avg">Average</label>
                 </div>
             </fieldset>
-            <select class="dropdown" , id="menu" , onchange="changeFunc()">
+            <select class="dropdown" id="menu"  onchange="changeFunc()">
                 <option>Choose a Country</option>
             </select>
             <script>
@@ -87,7 +87,7 @@
             <div class="dropdown">
                 <button id="go-btn" class="dropdown dropdown-btn"> GO!!!</button>
                 <script>
-                    const gotBtn = document.getElementById("go-btn").onclick = function () {
+                    document.getElementById("go-btn").onclick = function () {
                         const synth = window.speechSynthesis
                         let ourText = "Lets goooooooooooo!!!!"
                         synth.pitch = 1.5
